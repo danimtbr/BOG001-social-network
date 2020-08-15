@@ -10,6 +10,10 @@ const router = (route) => {
             {
                 return content.appendChild(pages.default());
             }
+        case "#/login":
+            {
+                return content.appendChild(pages.login());
+            }
 
     }
 
