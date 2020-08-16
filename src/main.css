@@ -98,7 +98,8 @@
         align-items: center;
     }
     
-    .divBackgroundInputView2 {
+    .divBackgroundInputView2,
+    .divBackgroundInputView3 {
         /* position: absolute; */
         display: flex;
         align-content: center;
@@ -114,29 +115,45 @@
         border-radius: 20px;
     }
     
-    .inputView2 {
+    .inputView2,
+    .inputView3 {
         border: none;
         outline: none;
         font-family: roboto;
         text-align: center;
     }
     
-    #loginView2 {
+    #loginView2,
+    #sinUpView3 {
         position: absolute;
-        width: 60px;
+        width: 120px;
         height: 28px;
-        left: 264px;
         top: 215px;
         font-family: Roboto;
-        font-style: normal;
-        font-weight: normal;
         font-size: 24px;
-        line-height: 28px;
         text-align: center;
         color: #D6556B;
     }
     
-    #loginViewButton {
+    #sinUpView3 {
+        position: absolute;
+        width: 120px;
+        height: 28px;
+        top: 180px;
+        font-family: Roboto;
+        font-size: 24px;
+        text-align: center;
+        color: #D6556B;
+    }
+    
+    .contentSingUpLogin {
+        width: 100%;
+        display: flex;
+        justify-content: flex-end;
+    }
+    
+    #loginViewButton,
+    #signUpViewButton {
         width: 254px;
         height: 38px;
         left: 38px;
@@ -155,6 +172,10 @@
         position: absolute;
         left: 94px;
         top: 33px;
+    }
+    
+    #logoView3 {
+        margin-bottom: 0px;
     }
     
     #formView2 {
@@ -192,10 +213,43 @@
         color: #969696;
     }
     
+    .spanView3 {
+        font-family: roboto;
+        color: #7c7a7a;
+        font-weight: bold;
+    }
+    
     #passwordReminder {
         width: 100%;
         display: flex;
         justify-content: flex-end;
+    }
+    
+    .mainView3 {
+        background-image: url(img/backgroundView3.png);
+        background-repeat: no-repeat;
+        background-size: cover;
+        display: flex;
+        position: absolute;
+        flex-direction: column;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        justify-content: center;
+        align-items: center;
+    }
+    
+    #formView3 {
+        margin-top: 50px;
+    }
+    
+    #back {
+        position: absolute;
+    }
+    
+    #backBotton {
+        width: 90%;
     }
     
     @media screen and (min-width:800px) {
