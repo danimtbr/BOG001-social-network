@@ -1,5 +1,6 @@
 import { pages } from "../controllers/pages.controller.js"
 
+
 let content = document.getElementById("body");
 
 const router = (route) => {
@@ -9,6 +10,10 @@ const router = (route) => {
         case "#/":
             {
                 return content.appendChild(pages.default());
+            }
+        case "#/signup":
+            {
+                return content.appendChild(pages.signup());
             }
         case "#/login":
             {
