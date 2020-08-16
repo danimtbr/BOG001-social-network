@@ -83,6 +83,21 @@
         display: none;
     }
     
+    .mainView3 {
+        background-image: url(img/backgroundView2.png);
+        background-repeat: no-repeat;
+        background-size: cover;
+        display: flex;
+        position: absolute;
+        flex-direction: column;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        justify-content: center;
+        align-items: center;
+    }
+    
     @media screen and (min-width:800px) {
         .mainView1 {
             background-image: none;
