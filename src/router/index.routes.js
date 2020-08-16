@@ -15,6 +15,11 @@ const router = (route) => {
             {
                 return content.appendChild(pages.signup());
             }
+        case "#/login":
+            {
+                return content.appendChild(pages.login());
+            }
+
     }
 
 }
