@@ -98,7 +98,23 @@
                 align-items: center;
             }
             
-            .divBackgroundInputView2 {
+            .mainView3 {
+                background-image: url(img/backgroundView3.png);
+                background-repeat: no-repeat;
+                background-size: cover;
+                display: flex;
+                position: absolute;
+                flex-direction: column;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                justify-content: center;
+                align-items: center;
+            }
+            
+            .divBackgroundInputView2,
+            .divBackgroundInputView3 {
                 /* position: absolute; */
                 display: flex;
                 align-content: center;
@@ -114,7 +130,8 @@
                 border-radius: 20px;
             }
             
-            .inputView2 {
+            .inputView2,
+            .inputView3 {
                 border: none;
                 outline: none;
                 font-family: roboto;
@@ -136,7 +153,30 @@
                 color: #D6556B;
             }
             
-            #loginViewButton {
+            #singUpView3 {
+                position: absolute;
+                width: 110px;
+                height: 28px;
+                left: 200px;
+                top: 180px;
+                font-family: Roboto;
+                font-size: 24px;
+                line-height: 28px;
+                text-align: center;
+                color: #D6556B;
+            }
+            
+            .spanView3 {
+                font-family: roboto;
+                color: #333333;
+            }
+            
+            #formView3 {
+                margin-top: 50px;
+            }
+            
+            #loginViewButton,
+            #signUpViewButton {
                 width: 254px;
                 height: 38px;
                 left: 38px;
@@ -274,10 +314,12 @@
                     display: flex;
                     width: 60%;
                 }
-                .mainView2 {
+                .mainView2,
+                .mainView3 {
                     background: white;
                 }
-                #contentView2 {
+                #contentView2,
+                #contentView3 {
                     display: flex;
                     align-items: center;
                     flex-direction: column;
@@ -294,9 +336,17 @@
                     left: 0px;
                     top: 0px;
                 }
+                #singUpView3 {
+                    position: relative;
+                    top: 30px;
+                    left: 0px;
+                }
                 #loginView2 {
                     position: relative;
                     top: 60px;
                     left: 0px;
+                }
+                #faceButton {
+                    margin-right: 30px;
                 }
             }
