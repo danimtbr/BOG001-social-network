@@ -13,6 +13,30 @@
 
     <!-- MAIN CONTENT -->
 
+    <!-- FIREBASE -->
+
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/7.18.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.18.0/firebase-auth.js"></script>
+
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+
+    <script>
+        // Your web app's Firebase configuration
+        var firebaseConfig = {
+            apiKey: "AIzaSyAR2mVZ5OMjtINUYbsdo7AxmjDNouEZbgc",
+            authDomain: "hibook-f9d96.firebaseapp.com",
+            databaseURL: "https://hibook-f9d96.firebaseio.com",
+            projectId: "hibook-f9d96",
+            storageBucket: "hibook-f9d96.appspot.com",
+            messagingSenderId: "205436349275",
+            appId: "1:205436349275:web:a85e7501a1ae1a804f887e"
+        };
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        const auth = firebase.auth();
+    </script>
 
 </body>
 
