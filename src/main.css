@@ -240,6 +240,16 @@
                 justify-content: flex-end;
             }
             
+            #invalidPass {
+                position: absolute;
+                width: 70%;
+                text-align: center;
+                font-family: roboto;
+                font-size: x-small;
+                font-weight: 700;
+                color: #DD5A6A;
+            }
+            
             @media screen and (min-width:800px) {
                 .mainView1 {
                     background-image: none;
@@ -348,5 +358,11 @@
                 }
                 #faceButton {
                     margin-right: 30px;
+                }
+                #invalidPass {
+                    position: absolute;
+                    left: 0px;
+                    width: 80%;
+                    font-size: small;
                 }
             }

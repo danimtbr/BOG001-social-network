@@ -19,6 +19,10 @@ const router = (route) => {
             {
                 return content.appendChild(pages.login());
             }
+        case "#/avatar":
+            {
+                return content.appendChild(pages.avatar());
+            }
 
     }
 
