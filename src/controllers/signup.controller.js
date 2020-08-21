@@ -2,9 +2,11 @@ import viewSignUp from "../views/signup.html";
 import logoView3 from "../img/logo.png";
 import faceImg from "../img/facebook.png";
 import googleImg from "../img/google.png";
-// import arrowBack from "../img/arrow-left.png"
 
 export default () => {
+
+    // Create Dynamic Elements ------------------------------------------>
+
     const divElement = document.createElement("main");
     divElement.classList = "mainView3";
     divElement.innerHTML = viewSignUp;
@@ -18,8 +20,8 @@ export default () => {
     const imgGoogle = divElement.querySelector("#googleButton");
     imgGoogle.src = googleImg;
 
-    // const imgBackBotton = divElement.querySelector("#back");
-    // imgBackBotton.src = arrowBack;
+
+    // SignUp Event ------------------------------------------------------>
 
     const signUpUser = divElement.querySelector("#formView3");
     signUpUser.addEventListener("submit", (e) => {

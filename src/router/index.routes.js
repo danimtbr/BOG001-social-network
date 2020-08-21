@@ -23,9 +23,11 @@ const router = (route) => {
             {
                 return content.appendChild(pages.avatar());
             }
-
+        case "#/posts":
+            {
+                return content.appendChild(pages.posts());
+            }
     }
-
 }
 
 export { router }
