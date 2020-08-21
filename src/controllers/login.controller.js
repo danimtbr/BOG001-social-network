@@ -55,12 +55,35 @@ export default () => {
     // Login FaceBook ------------------------------------------------------>
     const loginFacebook = divElement.querySelector("#loginFace");
     loginFacebook.addEventListener("click", event => {
+            event.preventDefault();
+            const provider = new firebase.auth.FacebookAuthProvider();
+            auth.signInWithPopup(provider)
+                .then(result => {
+                    console.log(result);
+                    console.log("signIn facebook");
+                })
+                .catch(err => {
+                    let popupElement = divElement.querySelector("#divOverlay");
+                    popupElement.classList.add("active");
+
+                    let popupTittle = divElement.querySelector("#tittlePopup");
+                    popupTittle.innerHTML = "Error:";
+
+                    let popupMessage = divElement.querySelector("#textPopup");
+                    popupMessage.innerHTML = "Could not authenticate by facebook. Please try again";
+                })
+
+
+        })
+        // Login Google -------------------------------------------->
+    const loginGoogle = divElement.querySelector("#loginGoogle");
+    loginGoogle.addEventListener("click", event => {
         event.preventDefault();
-        const provider = new firebase.auth.FacebookAuthProvider();
+        const provider = new firebase.auth.GoogleAuthProvider();
         auth.signInWithPopup(provider)
             .then(result => {
                 console.log(result);
-                console.log("signIn facebook");
+                console.log("Google signIn");
             })
             .catch(err => {
                 let popupElement = divElement.querySelector("#divOverlay");
@@ -70,10 +93,9 @@ export default () => {
                 popupTittle.innerHTML = "Error:";
 
                 let popupMessage = divElement.querySelector("#textPopup");
-                popupMessage.innerHTML = "Could not authenticate by facebook. Please try again";
+                popupMessage.innerHTML = "Could not authenticate by Google. Please try again later";
             })
 
     })
-
     return divElement;
 }

@@ -45,5 +45,51 @@ export default () => {
         }
 
     })
+
+    // Login FaceBook ------------------------------------------------------>
+    const signUpFacebook = divElement.querySelector("#signUpFace");
+    signUpFacebook.addEventListener("click", event => {
+            event.preventDefault();
+            const provider = new firebase.auth.FacebookAuthProvider();
+            auth.signInWithPopup(provider)
+                .then(result => {
+                    console.log(result);
+                    console.log("signIn facebook");
+                })
+                .catch(err => {
+                    let popupElement = divElement.querySelector("#divOverlay");
+                    popupElement.classList.add("active");
+
+                    let popupTittle = divElement.querySelector("#tittlePopup");
+                    popupTittle.innerHTML = "Error:";
+
+                    let popupMessage = divElement.querySelector("#textPopup");
+                    popupMessage.innerHTML = "Could not authenticate by facebook. Please try again";
+                })
+
+
+        })
+        // Login Google -------------------------------------------->
+    const signUpGoogle = divElement.querySelector("#signUpGoogle");
+    signUpGoogle.addEventListener("click", event => {
+        event.preventDefault();
+        const provider = new firebase.auth.GoogleAuthProvider();
+        auth.signInWithPopup(provider)
+            .then(result => {
+                console.log(result);
+                console.log("Google signIn");
+            })
+            .catch(err => {
+                let popupElement = divElement.querySelector("#divOverlay");
+                popupElement.classList.add("active");
+
+                let popupTittle = divElement.querySelector("#tittlePopup");
+                popupTittle.innerHTML = "Error:";
+
+                let popupMessage = divElement.querySelector("#textPopup");
+                popupMessage.innerHTML = "Could not authenticate by Google. Please try again later";
+            })
+
+    })
     return divElement;
 }
