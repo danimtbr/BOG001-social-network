@@ -2,19 +2,42 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  
-  <title>Document</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="https://fonts.googleapis.com/css?family=Lora|Roboto:400,700" rel="stylesheet">
+    <title>Document</title>
 </head>
 
-<body>
-  <figure class="head">
-  <img class="" id="" src="imagenes/size 1.png">
-</figure>
-  <button class = "button">Hello, i'm a button</button>
- 
+<body id="body">
+
+    <!-- MAIN CONTENT -->
+
+    <!-- FIREBASE -->
+
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/7.18.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.18.0/firebase-auth.js"></script>
+
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+    https://firebase.google.com/docs/web/setup#available-libraries -->
+
+    <script>
+        // Your web app's Firebase configuration
+        var firebaseConfig = {
+            apiKey: "AIzaSyCNU_2E0vH-XPBk3tqkrckPG_IowYbxrpU",
+            authDomain: "hibook-2fc84.firebaseapp.com",
+            databaseURL: "https://hibook-2fc84.firebaseio.com",
+            projectId: "hibook-2fc84",
+            storageBucket: "hibook-2fc84.appspot.com",
+            messagingSenderId: "376783395535",
+            appId: "1:376783395535:web:891ae5ecf7f5a8985bf5ba"
+        };
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        const auth = firebase.auth();
+    </script>
+
 <script src="bundle.js"></script></body>
 
 </html>
