@@ -2,6 +2,7 @@ import viewSignUp from "../views/signup.html";
 import logoView3 from "../img/logo.png";
 import faceImg from "../img/facebook.png";
 import googleImg from "../img/google.png";
+import { pages } from "./pages.controller.js";
 
 export default () => {
 
@@ -10,6 +11,8 @@ export default () => {
     const divElement = document.createElement("main");
     divElement.classList = "mainView3";
     divElement.innerHTML = viewSignUp;
+
+    divElement.appendChild(pages.popups());
 
     const imgLogoView3 = divElement.querySelector("#logoView3");
     imgLogoView3.src = logoView3;
