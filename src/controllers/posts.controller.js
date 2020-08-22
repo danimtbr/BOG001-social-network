@@ -15,7 +15,22 @@ export default () => {
     })
 
 
+    const postForm = divElement.querySelector("#formPost");
 
+    const createPost = async(post) => {
+        await database.collection("posts").doc().set({
+            post
+        })
+    }
+
+    postForm.addEventListener("submit", async event => {
+        event.preventDefault();
+
+        const postText = postForm["textPost"].value;
+
+        await createPost(postText);
+
+    })
 
     return divElement;
 }
