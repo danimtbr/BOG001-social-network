@@ -27,9 +27,9 @@ export default () => {
     }
 
     let objectPost = {
-        UserId: "sofi",
-        PostDate: Date.now(),
-        PostText: ""
+        userId: "sofi",
+        postDate: Date.now(),
+        postText: ""
     }
 
     postForm.addEventListener("submit", async event => {
@@ -40,12 +40,12 @@ export default () => {
         await createPost(objectPost);
         postForm.reset();
         postForm.focus();
-
+        await printPosts();
     });
-    const getPost = async() => await database.collection("posts").get();
-    window.addEventListener("DOMContentLoaded", async event => {
-        event.preventDefault();
+    const printPosts = async() => {
         const querySnapshot = await getPost();
+        const orderPosts = divElement.querySelector("#listPosts");
+        orderPosts.innerHTML = "";
         querySnapshot.forEach(element => {
             console.log(element.data());
             const dataElement = element.data();
@@ -54,9 +54,26 @@ export default () => {
             divCollection.innerHTML = collectionPost;
             let postCollection = divCollection.querySelector("#textPost");
             postCollection.innerHTML = dataElement.postText;
-            divElement.appendChild(divCollection);
-            console.log(divElement)
+            orderPosts.appendChild(divCollection);
         });
+    }
+
+    const getPost = async() => await database.collection("posts").get();
+    window.addEventListener("DOMContentLoaded", async event => {
+        event.preventDefault();
+        await printPosts();
+        //     const querySnapshot = await getPost();
+        //     querySnapshot.forEach(element => {
+        //         console.log(element.data());
+        //         const dataElement = element.data();
+        //         const divCollection = document.createElement("div");
+        //         divCollection.classList = "divPost";
+        //         divCollection.innerHTML = collectionPost;
+        //         let postCollection = divCollection.querySelector("#textPost");
+        //         postCollection.innerHTML = dataElement.postText;
+        //         divElement.appendChild(divCollection);
+        //         console.log(divElement)
+        //     });
     });
     return divElement;
 }
