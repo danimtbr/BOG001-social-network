@@ -288,10 +288,14 @@
             }
             
             @media screen and (min-width:800px) {
+                body {
+                    margin: 0;
+                }
                 .mainView1 {
                     background-image: none;
                     flex-direction: row-reverse;
                     justify-content: space-around;
+                    position: relative;
                 }
                 .mainText1 {
                     display: flex;

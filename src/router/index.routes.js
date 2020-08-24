@@ -5,6 +5,7 @@ let content = document.getElementById("body");
 
 const router = (route) => {
     content.innerHTML = "";
+    const uId = localStorage.getItem("user");
     switch (route) {
         case "":
         case "#/":
@@ -21,11 +22,11 @@ const router = (route) => {
             }
         case "#/avatar":
             {
-                return content.appendChild(pages.avatar());
+                return uId ? content.appendChild(pages.avatar()) : content.appendChild(pages.default());
             }
         case "#/posts":
             {
-                return content.appendChild(pages.posts());
+                return uId ? content.appendChild(pages.posts()) : content.appendChild(pages.default());
             }
     }
 }
