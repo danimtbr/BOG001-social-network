@@ -287,6 +287,10 @@
                 opacity: 100%
             }
             
+            .editPostArea {
+                display: none;
+            }
+            
             @media screen and (min-width:800px) {
                 body {
                     margin: 0;
