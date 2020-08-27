@@ -291,6 +291,11 @@
                 display: none;
             }
             
+            #eyePassword {
+                width: 30px;
+                opacity: 50%;
+            }
+            
             @media screen and (min-width:800px) {
                 body {
                     margin: 0;

@@ -3,7 +3,9 @@ import logoImg from "../img/logo.png";
 import faceImg from "../img/facebook.png";
 import googleImg from "../img/google.png";
 import arrowBack from "../img/arrow-left.png";
+import eyeLogin from "../img/eyeLogin.png";
 import { pages } from "./pages.controller.js";
+
 
 
 export default () => {
@@ -27,6 +29,9 @@ export default () => {
 
     const imgBackBotton = divElement.querySelector("#back");
     imgBackBotton.src = arrowBack;
+
+    const imgEye = divElement.querySelector("#eyePassword");
+    imgEye.src = eyeLogin;
 
     // Login Event ------------------------------------------------------>
 
@@ -96,6 +101,16 @@ export default () => {
                 popupMessage.innerHTML = "Could not authenticate by Google. Please try again later";
             })
 
+    })
+
+    const eyesLogin = divElement.querySelector("#eyePassword");
+    eyesLogin.addEventListener("click", event => {
+        const idPassword = divElement.querySelector("#password");
+        if (idPassword.type === "password") {
+            idPassword.type = "text"
+        } else {
+            idPassword.type = "password";
+        }
     })
     return divElement;
 }
