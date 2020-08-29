@@ -4,6 +4,8 @@ import SignUp from "./signup.controller.js";
 import Avatar from "./avatar.controller.js";
 import Popups from "./popups.controller.js";
 import Posts from "./posts.controller.js";
+import AboutUs from "./aboutus.controller.js"
+import ContactUs from "./contactus.controller.js"
 
 const pages = {
     default: Default,
@@ -11,7 +13,9 @@ const pages = {
     signup: SignUp,
     avatar: Avatar,
     popups: Popups,
-    posts: Posts
+    posts: Posts,
+    aboutUs: AboutUs,
+    contactUs: ContactUs
 }
 
 export { pages }
