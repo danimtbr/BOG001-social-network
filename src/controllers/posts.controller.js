@@ -39,11 +39,13 @@ export default () => {
     return divElement;
 }
 
-const onGetPost = (callback) => database.collection("posts").onSnapshot(callback);
+const onGetPost = (callback) => database.collection("posts").orderBy("postDate", "desc").onSnapshot(callback);
 const deletePost = (id) => database.collection("posts").doc(id).delete();
 const getPost = (id) => database.collection("posts").doc(id).get();
 const updatePost = (id, updateTextPost) => database.collection("posts").doc(id).update(updateTextPost);
-const updateLikes = (id, counter) => database.collection("posts").doc(id).update({ likesPost: counter })
+const updateLikes = (id, counter) => database.collection("posts").doc(id).update({ likesPost: counter });
+const updateUserLike = (id, userLikeId) => database.collection("posts").doc(id).update({ usersLike: firebase.firestore.FieldValue.arrayUnion(userLikeId) });
+const updateRemoveLike = (id, userLikeId) => database.collection("posts").doc(id).update({ usersLike: firebase.firestore.FieldValue.arrayRemove(userLikeId) });
 
 const printPosts = (listPost, querySnapshot) => {
     listPost.innerHTML = "";
@@ -58,8 +60,7 @@ const printPosts = (listPost, querySnapshot) => {
         let divPost = divCollection.querySelector("#divPostId");
         divPost.id = dataElement.id;
         let textLikes = divCollection.querySelector("#counterLikes");
-        textLikes.innerHTML = dataElement.likesPost + "Likes";
-        console.log(dataElement);
+        textLikes.innerHTML = dataElement.usersLike.length + "Likes";
         const deleteButtons = divCollection.querySelectorAll(".deletePost");
         deleteButtons.forEach(button => {
             button.addEventListener("click", async(event) => {
@@ -97,11 +98,17 @@ const printPosts = (listPost, querySnapshot) => {
 
 
         const likebtn = divCollection.querySelector("#like");
-        likebtn.addEventListener("click", (event) => {
+        likebtn.addEventListener("click", async(event) => {
             const idPost = event.target.parentNode.id;
-            updateLikes(idPost, increment);
-
+            const postGet = await getPost(idPost);
+            console.log(postGet)
+            if (postGet.data().usersLike.indexOf(localStorage.getItem("user")) === -1) {
+                updateUserLike(idPost, localStorage.getItem("user"));
+            } else {
+                updateRemoveLike(idPost, localStorage.getItem("user"));
+            }
         })
+
 
         listPost.appendChild(divCollection);
     });
@@ -111,15 +118,17 @@ const printPosts = (listPost, querySnapshot) => {
 const createPost = async(post) => {
     await database.collection("posts").doc().set({
         "userId": post.userId,
-        "postDate": post.postDate,
+        "postDate": firebase.firestore.FieldValue.serverTimestamp(),
         "postText": post.postText,
-        "likesPost": post.likesPost
+        "likesPost": post.likesPost,
+        "usersLike": post.usersLike
     })
 }
 
 let objectPost = {
     userId: localStorage.getItem("user"),
-    postDate: Date.now(),
+    postDate: "",
     postText: "",
-    likesPost: "0"
+    likesPost: "0",
+    usersLike: new Array()
 }
