@@ -100,7 +100,7 @@ const printPosts = (listPost, querySnapshot) => {
         likebtn.addEventListener("click", (event) => {
             const idPost = event.target.parentNode.id;
             updateLikes(idPost, increment);
-            const userId = localStorage.getItem(user);
+
         })
 
         listPost.appendChild(divCollection);
@@ -118,7 +118,7 @@ const createPost = async(post) => {
 }
 
 let objectPost = {
-    userId: "sofi",
+    userId: localStorage.getItem("user"),
     postDate: Date.now(),
     postText: "",
     likesPost: "0"
