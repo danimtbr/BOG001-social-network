@@ -1,3 +1,7 @@
+            body {
+                margin: 0%;
+            }
+            
             .mainView1 {
                 background-image: url(img/backgroundView1.png);
                 background-repeat: no-repeat;
@@ -349,6 +353,11 @@
             
             #like {
                 width: 20px;
+            }
+            
+            #userInfoPost {
+                background: linear-gradient(270deg, #F1B048 0%, #DD5A6A 96.84%);
+                padding: 5%;
             }
             
             @media screen and (min-width:800px) {
