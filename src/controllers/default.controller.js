@@ -5,6 +5,7 @@ import imgCommunityView1 from "../img/community.png";
 import imgShopView1 from "../img/shop.png";
 import imgLogoViewDesktop from "../img/logoDesktop.png";
 
+
 export default () => {
     const divElement = document.createElement("main");
     divElement.classList = "mainView1";

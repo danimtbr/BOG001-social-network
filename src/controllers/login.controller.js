@@ -5,6 +5,7 @@ import googleImg from "../img/google.png";
 import arrowBack from "../img/arrow-left.png";
 import eyeLogin from "../img/eyeLogin.png";
 import { pages } from "./pages.controller.js";
+import { auth, firebase } from "../init-firebase.js";
 
 
 
@@ -62,8 +63,10 @@ export default () => {
     loginFacebook.addEventListener("click", event => {
             event.preventDefault();
             const provider = new firebase.auth.FacebookAuthProvider();
+            console.log(provider);
             auth.signInWithPopup(provider)
                 .then(result => {
+                    window.location.href = "#/posts"
                     console.log(result);
                     console.log("signIn facebook");
                 })
@@ -87,6 +90,7 @@ export default () => {
         const provider = new firebase.auth.GoogleAuthProvider();
         auth.signInWithPopup(provider)
             .then(result => {
+                window.location.href = "#/posts"
                 console.log(result);
                 console.log("Google signIn");
             })
@@ -109,7 +113,7 @@ export default () => {
         if (idPassword.type === "password") {
             idPassword.type = "text"
         } else {
-            idPassword.type = "password";
+            idPassword.type = "password"
         }
     })
     return divElement;
