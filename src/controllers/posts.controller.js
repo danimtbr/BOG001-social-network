@@ -71,6 +71,12 @@ const printPosts = (listPost, querySnapshot) => {
         textLikes.innerHTML = dataElement.usersLike.length + "Likes";
         const deleteButtons = divCollection.querySelectorAll(".deletePost");
         const deleteButtonId = divCollection.querySelector("#deletePostButton")
+        const likebtn = divCollection.querySelector("#like");
+        if (dataElement.usersLike.indexOf(userSessionNow) === -1) {
+            likebtn.src = heart;
+        } else {
+            likebtn.src = heartlike;
+        }
         if (dataElement.userId === userSessionNow) {
             deleteButtonId.style.display = "block";
             deleteButtons.forEach(button => {
@@ -118,8 +124,8 @@ const printPosts = (listPost, querySnapshot) => {
         }
 
 
-        const likebtn = divCollection.querySelector("#like");
-        likebtn.src = heart;
+
+
         likebtn.addEventListener("click", async(event) => {
             const idPost = event.target.parentNode.id;
             const postGet = await getPost(idPost);
@@ -128,7 +134,7 @@ const printPosts = (listPost, querySnapshot) => {
                 likebtn.src = heartlike;
                 updateUserLike(idPost, localStorage.getItem("user"));
             } else {
-                // likebtn.src = heart;
+                likebtn.src = heart;
                 updateRemoveLike(idPost, localStorage.getItem("user"));
             }
         })
