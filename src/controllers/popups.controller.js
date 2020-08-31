@@ -1,5 +1,7 @@
 import viewPopups from "../views/popups.html";
 
+
+
 export default () => {
     let divElement = document.createElement("div");
     divElement.id = "divOverlay";

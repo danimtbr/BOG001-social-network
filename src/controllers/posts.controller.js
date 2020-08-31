@@ -1,5 +1,6 @@
 import viewPosts from "../views/posts.html";
 import collectionPost from "../views/postcollection.html";
+import { auth, database, timeStamp, arrayUnionFunction, arrayRemoveFunction } from "../init-firebase.js";
 
 export default () => {
 
@@ -7,6 +8,11 @@ export default () => {
     divElement.id = "containerPost";
     divElement.classList = "mainViewPosts";
     divElement.innerHTML = viewPosts;
+
+    const username = divElement.querySelector("#userSessionName");
+    console.log(username);
+    username.textContent = localStorage.getItem("username").toString();
+
 
     const logout = divElement.querySelector("#btnLogout");
     logout.addEventListener("click", (event) => {
@@ -21,8 +27,7 @@ export default () => {
     postForm.addEventListener("submit", async event => {
         event.preventDefault();
         const postText = postForm["textPost"];
-        objectPost.postText = postText.value;
-        await createPost(objectPost);
+        await createPost(postText.value);
         postForm.reset();
         postForm.focus();
     });
@@ -43,9 +48,8 @@ const onGetPost = (callback) => database.collection("posts").orderBy("postDate",
 const deletePost = (id) => database.collection("posts").doc(id).delete();
 const getPost = (id) => database.collection("posts").doc(id).get();
 const updatePost = (id, updateTextPost) => database.collection("posts").doc(id).update(updateTextPost);
-const updateLikes = (id, counter) => database.collection("posts").doc(id).update({ likesPost: counter });
-const updateUserLike = (id, userLikeId) => database.collection("posts").doc(id).update({ usersLike: firebase.firestore.FieldValue.arrayUnion(userLikeId) });
-const updateRemoveLike = (id, userLikeId) => database.collection("posts").doc(id).update({ usersLike: firebase.firestore.FieldValue.arrayRemove(userLikeId) });
+const updateUserLike = (id, userLikeId) => database.collection("posts").doc(id).update({ usersLike: arrayUnionFunction(userLikeId) });
+const updateRemoveLike = (id, userLikeId) => database.collection("posts").doc(id).update({ usersLike: arrayRemoveFunction(userLikeId) });
 
 const printPosts = (listPost, querySnapshot) => {
     listPost.innerHTML = "";
@@ -55,6 +59,8 @@ const printPosts = (listPost, querySnapshot) => {
         const divCollection = document.createElement("div");
         divCollection.classList = "divPost";
         divCollection.innerHTML = collectionPost;
+        let postUserName = divCollection.querySelector("#username");
+        postUserName.textContent = dataElement.userName;
         let postParagraph = divCollection.querySelector("#textPost");
         postParagraph.innerHTML = dataElement.postText;
         let divPost = divCollection.querySelector("#divPostId");
@@ -84,8 +90,7 @@ const printPosts = (listPost, querySnapshot) => {
                     btnEdit.innerHTML = "Update";
                 } else {
                     await updatePost(idEvent, {
-                        "userId": objectPost.userId,
-                        "postDate": objectPost.postDate,
+                        "postDate": timeStamp,
                         "postText": postEdit.value
                     });
                     postEdit.style.display = "none";
@@ -117,18 +122,10 @@ const printPosts = (listPost, querySnapshot) => {
 
 const createPost = async(post) => {
     await database.collection("posts").doc().set({
-        "userId": post.userId,
-        "postDate": firebase.firestore.FieldValue.serverTimestamp(),
-        "postText": post.postText,
-        "likesPost": post.likesPost,
-        "usersLike": post.usersLike
+        "userId": localStorage.getItem("user"),
+        "userName": localStorage.getItem("username"),
+        "postDate": timeStamp,
+        "postText": post,
+        "usersLike": new Array()
     })
-}
-
-let objectPost = {
-    userId: localStorage.getItem("user"),
-    postDate: "",
-    postText: "",
-    likesPost: "0",
-    usersLike: new Array()
 }

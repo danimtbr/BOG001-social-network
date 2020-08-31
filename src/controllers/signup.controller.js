@@ -3,6 +3,7 @@ import logoView3 from "../img/logo.png";
 import faceImg from "../img/facebook.png";
 import googleImg from "../img/google.png";
 import { pages } from "./pages.controller.js";
+import { auth } from "../init-firebase.js";
 
 export default () => {
 
@@ -33,14 +34,18 @@ export default () => {
         const signUpEmail = divElement.querySelector("#email").value;
         const signUpPassword = divElement.querySelector("#password").value;
         const signUpConfirmPassword = divElement.querySelector("#confirmPass").value;
-        console.log(signUpPassword, signUpEmail, signUpUserName, signUpConfirmPassword);
 
         if (signUpPassword === signUpConfirmPassword) {
             auth
                 .createUserWithEmailAndPassword(signUpEmail, signUpPassword)
                 .then(userCredentials => {
-                    console.log("userRegistred");
-                    window.location.href = "#/avatar"
+                    userCredentials.user.updateProfile({
+                        displayName: signUpUserName
+                    }).then(function() {
+                        window.location.href = "#/avatar";
+                    }).catch(function(error) {
+                        alert("Authentication Failed");
+                    });
                 })
         } else {
             let spanInvalid = divElement.querySelector("#invalidPass");
