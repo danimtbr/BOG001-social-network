@@ -1,6 +1,8 @@
 import viewPosts from "../views/posts.html";
 import collectionPost from "../views/postcollection.html";
 import { auth, database, timeStamp, arrayUnionFunction, arrayRemoveFunction } from "../init-firebase.js";
+import heartlike from "../img/heartlike.png";
+import heart from "../img/heart.png";
 
 export default () => {
 
@@ -12,7 +14,6 @@ export default () => {
     const username = divElement.querySelector("#userSessionName");
     console.log(username);
     username.textContent = localStorage.getItem("username").toString();
-
 
     const logout = divElement.querySelector("#btnLogout");
     logout.addEventListener("click", (event) => {
@@ -117,15 +118,17 @@ const printPosts = (listPost, querySnapshot) => {
         }
 
 
-
         const likebtn = divCollection.querySelector("#like");
+        likebtn.src = heart;
         likebtn.addEventListener("click", async(event) => {
             const idPost = event.target.parentNode.id;
             const postGet = await getPost(idPost);
             console.log(postGet)
             if (postGet.data().usersLike.indexOf(localStorage.getItem("user")) === -1) {
+                likebtn.src = heartlike;
                 updateUserLike(idPost, localStorage.getItem("user"));
             } else {
+                // likebtn.src = heart;
                 updateRemoveLike(idPost, localStorage.getItem("user"));
             }
         })
