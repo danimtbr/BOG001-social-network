@@ -56,6 +56,7 @@ const printPosts = (listPost, querySnapshot) => {
     querySnapshot.forEach(element => {
         const dataElement = element.data();
         dataElement.id = element.id;
+        const userSessionNow = localStorage.getItem("user");
         const divCollection = document.createElement("div");
         divCollection.classList = "divPost";
         divCollection.innerHTML = collectionPost;
@@ -68,38 +69,53 @@ const printPosts = (listPost, querySnapshot) => {
         let textLikes = divCollection.querySelector("#counterLikes");
         textLikes.innerHTML = dataElement.usersLike.length + "Likes";
         const deleteButtons = divCollection.querySelectorAll(".deletePost");
+        const deleteButtonId = divCollection.querySelector("#deletePostButton")
+        if (dataElement.userId === userSessionNow) {
+            deleteButtonId.style.display = "block";
+            deleteButtons.forEach(button => {
+                button.addEventListener("click", async(event) => {
+                    await deletePost(event.target.parentNode.id);
+                })
+            })
+
+        }
         deleteButtons.forEach(button => {
             button.addEventListener("click", async(event) => {
                 await deletePost(event.target.parentNode.id);
             })
         })
 
-        const editButtons = divCollection.querySelectorAll(".editPost");
-        editButtons.forEach(button => {
-            button.addEventListener("click", async(event) => {
-                const idEvent = event.target.parentNode.id;
-                const postGet = await getPost(idEvent);
-                let divPost = divCollection.querySelector("#" + idEvent);
-                const btnEdit = divPost.querySelector("#editPostButton");
-                const postEditing = divPost.querySelector("#textPost");
-                const postEdit = divPost.querySelector("#editPost");
-                if (btnEdit.innerHTML === "Edit") {
-                    postEditing.style.display = "none";
-                    postEdit.value = postGet.data().postText;
-                    postEdit.style.display = "block";
-                    btnEdit.innerHTML = "Update";
-                } else {
-                    await updatePost(idEvent, {
-                        "postDate": timeStamp,
-                        "postText": postEdit.value
-                    });
-                    postEdit.style.display = "none";
+        const editButtonId = divCollection.querySelector("#editPostButton");
+        if (dataElement.userId === userSessionNow) {
+            editButtonId.style.display = "block";
+            const editButtons = divCollection.querySelectorAll(".editPost");
+            editButtons.forEach(button => {
+                button.addEventListener("click", async(event) => {
+                    const idEvent = event.target.parentNode.id;
+                    const postGet = await getPost(idEvent);
+                    let divPost = divCollection.querySelector("#" + idEvent);
+                    const btnEdit = divPost.querySelector("#editPostButton");
                     const postEditing = divPost.querySelector("#textPost");
-                    postEditing.style.display = "block";
-                    btnEdit.innerHTML = "Edit";
-                }
+                    const postEdit = divPost.querySelector("#editPost");
+                    if (btnEdit.innerHTML === "Edit") {
+                        postEditing.style.display = "none";
+                        postEdit.value = postGet.data().postText;
+                        postEdit.style.display = "block";
+                        btnEdit.innerHTML = "Update";
+                    } else {
+                        await updatePost(idEvent, {
+                            "postDate": timeStamp,
+                            "postText": postEdit.value
+                        });
+                        postEdit.style.display = "none";
+                        const postEditing = divPost.querySelector("#textPost");
+                        postEditing.style.display = "block";
+                        btnEdit.innerHTML = "Edit";
+                    }
+                })
             })
-        })
+        }
+
 
 
         const likebtn = divCollection.querySelector("#like");
