@@ -313,6 +313,7 @@
                 flex-direction: column;
                 align-items: center;
                 margin-top: 10vw;
+                color: #333333;
             }
             
             .contentPost {
@@ -336,7 +337,7 @@
             .contentButtons {
                 display: flex;
                 justify-content: space-around;
-                width: 50%;
+                width: 40%;
             }
             
             #linePost {
@@ -358,6 +359,48 @@
             #userInfoPost {
                 background: linear-gradient(270deg, #F1B048 0%, #DD5A6A 96.84%);
                 padding: 5%;
+                display: flex;
+                justify-content: space-around;
+                position: fixed;
+                width: 100%;
+                top: 0;
+                z-index: 1000;
+            }
+            
+            #counterLikes {
+                font-size: small;
+                opacity: 50%;
+            }
+            
+            #contentLikes {
+                display: flex;
+                align-items: center;
+                justify-content: space-around;
+                width: 23%;
+            }
+            
+            #userSessionName {
+                color: white;
+                font-weight: bold;
+            }
+            
+            #formPost {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            #save {
+                width: 20%;
+            }
+            
+            #textPost {
+                width: 98%;
+                border-color: #DD5A6A;
+            }
+            
+            #usernamePost {
+                font-weight: 600;
             }
             
             @media screen and (min-width:800px) {

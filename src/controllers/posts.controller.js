@@ -61,7 +61,7 @@ const printPosts = (listPost, querySnapshot) => {
         const divCollection = document.createElement("div");
         divCollection.classList = "divPost";
         divCollection.innerHTML = collectionPost;
-        let postUserName = divCollection.querySelector("#username");
+        let postUserName = divCollection.querySelector("#usernamePost");
         postUserName.textContent = dataElement.userName;
         let postParagraph = divCollection.querySelector("#textPost");
         postParagraph.innerHTML = dataElement.postText;
@@ -81,7 +81,7 @@ const printPosts = (listPost, querySnapshot) => {
             deleteButtonId.style.display = "block";
             deleteButtons.forEach(button => {
                 button.addEventListener("click", async(event) => {
-                    await deletePost(event.target.parentNode.id);
+                    await deletePost(event.target.parentNode.parentNode.parentNode.id);
                 })
             })
 
@@ -98,7 +98,8 @@ const printPosts = (listPost, querySnapshot) => {
             const editButtons = divCollection.querySelectorAll(".editPost");
             editButtons.forEach(button => {
                 button.addEventListener("click", async(event) => {
-                    const idEvent = event.target.parentNode.id;
+                    const idEvent = event.target.parentNode.parentNode.parentNode.id;
+                    console.log(idEvent)
                     const postGet = await getPost(idEvent);
                     let divPost = divCollection.querySelector("#" + idEvent);
                     const btnEdit = divPost.querySelector("#editPostButton");
@@ -127,9 +128,8 @@ const printPosts = (listPost, querySnapshot) => {
 
 
         likebtn.addEventListener("click", async(event) => {
-            const idPost = event.target.parentNode.id;
+            const idPost = event.target.parentNode.parentNode.id;
             const postGet = await getPost(idPost);
-            console.log(postGet)
             if (postGet.data().usersLike.indexOf(localStorage.getItem("user")) === -1) {
                 likebtn.src = heartlike;
                 updateUserLike(idPost, localStorage.getItem("user"));
