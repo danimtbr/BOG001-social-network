@@ -296,8 +296,10 @@
             }
             
             #eyePassword {
-                width: 30px;
+                width: 15px;
                 opacity: 50%;
+                height: 20px;
+                align-self: center;
             }
             
             .deletePost {
@@ -401,6 +403,38 @@
             
             #usernamePost {
                 font-weight: 600;
+            }
+            
+            .divViewPopUpDelete {
+                background: rgba(0, 0, 0, 0.3);
+                position: fixed;
+                top: 0;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                visibility: hidden;
+            }
+            
+            .divViewPopUpDelete.active {
+                visibility: visible;
+            }
+            
+            .deleteAlert {
+                background: white;
+                box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.3);
+                border-radius: 5px;
+                font-family: 'Lora', Serif;
+                padding: 20px;
+                text-align: center;
+                width: 200px;
+            }
+            
+            .deleteAlert.btnCancel {
+                display: block;
+                text-align: right;
             }
             
             @media screen and (min-width:800px) {
