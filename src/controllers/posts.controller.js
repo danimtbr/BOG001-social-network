@@ -3,6 +3,7 @@ import collectionPost from "../views/postcollection.html";
 import { auth, database, timeStamp, arrayUnionFunction, arrayRemoveFunction } from "../init-firebase.js";
 import heartlike from "../img/heartlike.png";
 import heart from "../img/heart.png";
+import { pages } from "./pages.controller.js"
 
 export default () => {
 
@@ -14,6 +15,9 @@ export default () => {
     const username = divElement.querySelector("#userSessionName");
     console.log(username);
     username.textContent = localStorage.getItem("username").toString();
+
+
+    divElement.appendChild(pages.popupdelete());
 
     const logout = divElement.querySelector("#btnLogout");
     logout.addEventListener("click", (event) => {
@@ -28,9 +32,13 @@ export default () => {
     postForm.addEventListener("submit", async event => {
         event.preventDefault();
         const postText = postForm["textPost"];
-        await createPost(postText.value);
-        postForm.reset();
-        postForm.focus();
+        if (postText.value === "") {
+            alert("Your post is empty");
+        } else {
+            await createPost(postText.value);
+            postForm.reset();
+            postForm.focus();
+        }
     });
 
 
@@ -72,6 +80,8 @@ const printPosts = (listPost, querySnapshot) => {
         const deleteButtons = divCollection.querySelectorAll(".deletePost");
         const deleteButtonId = divCollection.querySelector("#deletePostButton")
         const likebtn = divCollection.querySelector("#like");
+        const idPopUp = document.querySelector("#deleteIdPopup");
+        console.log(idPopUp);
         if (dataElement.usersLike.indexOf(userSessionNow) === -1) {
             likebtn.src = heart;
         } else {
@@ -81,6 +91,7 @@ const printPosts = (listPost, querySnapshot) => {
             deleteButtonId.style.display = "block";
             deleteButtons.forEach(button => {
                 button.addEventListener("click", async(event) => {
+                    idPopUp.classList.add("active");
                     await deletePost(event.target.parentNode.parentNode.parentNode.id);
                 })
             })

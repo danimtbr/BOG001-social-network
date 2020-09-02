@@ -6,6 +6,7 @@ import Popups from "./popups.controller.js";
 import Posts from "./posts.controller.js";
 import AboutUs from "./aboutus.controller.js"
 import ContactUs from "./contactus.controller.js"
+import PopUpDelete from "./alertdelete.controller.js"
 
 const pages = {
     default: Default,
@@ -15,7 +16,8 @@ const pages = {
     popups: Popups,
     posts: Posts,
     aboutUs: AboutUs,
-    contactUs: ContactUs
+    contactUs: ContactUs,
+    popupdelete: PopUpDelete
 }
 
 export { pages }

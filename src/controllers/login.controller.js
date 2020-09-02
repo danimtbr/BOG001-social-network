@@ -4,6 +4,7 @@ import faceImg from "../img/facebook.png";
 import googleImg from "../img/google.png";
 import arrowBack from "../img/arrow-left.png";
 import eyeLogin from "../img/eyeLogin.png";
+import hideLogin from "../img/hideLogin.png"
 import { pages } from "./pages.controller.js";
 import { auth, firebase } from "../init-firebase.js";
 
@@ -32,7 +33,8 @@ export default () => {
     imgBackBotton.src = arrowBack;
 
     const imgEye = divElement.querySelector("#eyePassword");
-    imgEye.src = eyeLogin;
+    imgEye.src = hideLogin;
+
 
     // Login Event ------------------------------------------------------>
 
@@ -112,7 +114,10 @@ export default () => {
         const idPassword = divElement.querySelector("#password");
         if (idPassword.type === "password") {
             idPassword.type = "text"
+            imgEye.src = eyeLogin;
+
         } else {
+            imgEye.src = hideLogin;
             idPassword.type = "password"
         }
     })
