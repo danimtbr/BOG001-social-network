@@ -7,6 +7,7 @@ import Posts from "./posts.controller.js";
 import AboutUs from "./aboutus.controller.js"
 import ContactUs from "./contactus.controller.js"
 import PopUpDelete from "./alertdelete.controller.js"
+import TextAreaPost from "./postTextarea.controller.js"
 
 const pages = {
     default: Default,
@@ -17,7 +18,8 @@ const pages = {
     posts: Posts,
     aboutUs: AboutUs,
     contactUs: ContactUs,
-    popupdelete: PopUpDelete
+    popupdelete: PopUpDelete,
+    textAreaPost: TextAreaPost
 }
 
 export { pages }

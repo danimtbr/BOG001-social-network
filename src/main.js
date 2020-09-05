@@ -12,9 +12,11 @@ auth.onAuthStateChanged((user) => {
     if (user) {
         localStorage.setItem("user", user.uid);
         localStorage.setItem("username", user.displayName);
+        console.log("¡¡¡Logueado");
     } else {
         localStorage.removeItem("user");
         localStorage.removeItem("username");
+        console.log("¡¡Deslogueado")
         window.location.href = "#/";
     }
 });
