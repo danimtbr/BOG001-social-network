@@ -304,28 +304,38 @@
             
             .deletePost {
                 display: none;
+                width: 20px;
+                height: 20px;
+                opacity: 70%;
             }
             
             .editPost {
                 display: none;
+                width: 20px;
+                height: 20px;
+                opacity: 70%;
             }
             
             #listPosts {
                 display: flex;
                 flex-direction: column;
                 align-items: center;
-                margin-top: 10vw;
+                margin-top: 20vw;
                 color: #333333;
             }
             
             .contentPost {
-                width: 80%;
+                width: 100%;
                 margin-bottom: 5vw;
+                display: flex;
+                justify-content: space-around;
             }
             
             .contentNameButton {
                 display: flex;
-                justify-content: space-between;
+                width: 30%;
+                flex-direction: column;
+                align-items: center;
             }
             
             .divPost {
@@ -403,6 +413,7 @@
             
             #usernamePost {
                 font-weight: 600;
+                color: #E78559;
             }
             
             .divViewPopUpDelete {
@@ -435,6 +446,48 @@
             .deleteAlert.btnCancel {
                 display: block;
                 text-align: right;
+            }
+            
+            #imgNewPost {
+                border-radius: 100%;
+                position: fixed;
+                z-index: 1000;
+                top: 75%;
+                right: 10%;
+                width: 18%;
+                box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.5);
+            }
+            
+            #footerViewPost {
+                background: linear-gradient(90deg, #EEADB4 0%, #F3C4AB 54.17%, #F8D6A4 99.97%, #F1B048 99.98%, rgba(214, 85, 210, 0) 99.99%);
+                padding-top: 2%;
+                padding-bottom: 3%;
+                display: flex;
+                justify-content: space-around;
+                position: fixed;
+                width: 100%;
+                z-index: 1000;
+                top: 92%;
+                color: white;
+                font-size: small;
+                font-family: 'Lora', Serif;
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .contentPostBtns {
+                width: 60%;
+                margin-right: 10%;
+            }
+            
+            #avatarUser {
+                width: 60px;
+                height: 60px;
+            }
+            
+            .btnsPost {
+                display: flex;
+                justify-content: space-between;
             }
             
             @media screen and (min-width:800px) {
