@@ -30,6 +30,15 @@ export default () => {
 
     divElement.appendChild(pages.popupdelete());
 
+
+    const menuSettingsUser = divElement.querySelector("#settingsUser")
+    const settingsUser = divElement.querySelector("#settingsViewPosts");
+    settingsUser.addEventListener("click", () => {
+        console.log(menuSettingsUser.style.display);
+        menuSettingsUser.style.display == "none" || "" ? menuSettingsUser.style.display = "flex" : menuSettingsUser.style.display = "none";
+    })
+
+
     const logout = divElement.querySelector("#btnLogout");
     logout.addEventListener("click", (event) => {
         event.preventDefault();
@@ -48,6 +57,8 @@ export default () => {
 
     return divElement;
 }
+
+
 
 const printPosts = (listPost, querySnapshot) => {
     listPost.innerHTML = "";
