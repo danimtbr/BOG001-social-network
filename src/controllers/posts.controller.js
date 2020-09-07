@@ -61,8 +61,8 @@ const updateUserLike = (id, userLikeId) => database.collection("posts").doc(id).
 const updateRemoveLike = (id, userLikeId) => database.collection("posts").doc(id).update({ usersLike: arrayRemoveFunction(userLikeId) });
 
 const printPosts = (listPost, querySnapshot) => {
-listPost.innerHTML = "";
-querySnapshot.forEach(element => {
+    listPost.innerHTML = "";
+    querySnapshot.forEach(element => {
         const dataElement = element.data();
         dataElement.id = element.id;
         const userSessionNow = localStorage.getItem("user");
@@ -98,60 +98,59 @@ querySnapshot.forEach(element => {
                     idPopUp.classList.remove("active");
                 })
             })
-        })
-}
+        }
 
-const editButtonId = divCollection.querySelector("#editPostButton");
-if (dataElement.userId === userSessionNow) {
-    editButtonId.style.display = "block";
-    const editButtons = divCollection.querySelectorAll(".editPost");
-    editButtons.forEach(button => {
-        button.addEventListener("click", async(event) => {
-            const idEvent = event.target.parentNode.parentNode.parentNode.id;
-            console.log(idEvent)
-            const postGet = await getPost(idEvent);
-            let divPost = divCollection.querySelector("#" + idEvent);
-            const btnEdit = divPost.querySelector("#editPostButton");
-            const postEditing = divPost.querySelector("#textPost");
-            const postEdit = divPost.querySelector("#editPost");
-            if (btnEdit.innerHTML === "Edit") {
-                postEditing.style.display = "none";
-                postEdit.value = postGet.data().postText;
-                postEdit.style.display = "block";
-                btnEdit.innerHTML = "Update";
+        const editButtonId = divCollection.querySelector("#editPostButton");
+        if (dataElement.userId === userSessionNow) {
+            editButtonId.style.display = "block";
+            const editButtons = divCollection.querySelectorAll(".editPost");
+            editButtons.forEach(button => {
+                button.addEventListener("click", async(event) => {
+                    const idEvent = event.target.parentNode.parentNode.parentNode.id;
+                    console.log(idEvent)
+                    const postGet = await getPost(idEvent);
+                    let divPost = divCollection.querySelector("#" + idEvent);
+                    const btnEdit = divPost.querySelector("#editPostButton");
+                    const postEditing = divPost.querySelector("#textPost");
+                    const postEdit = divPost.querySelector("#editPost");
+                    if (btnEdit.innerHTML === "Edit") {
+                        postEditing.style.display = "none";
+                        postEdit.value = postGet.data().postText;
+                        postEdit.style.display = "block";
+                        btnEdit.innerHTML = "Update";
+                    } else {
+                        await updatePost(idEvent, {
+                            "postDate": timeStamp,
+                            "postText": postEdit.value
+                        });
+                        postEdit.style.display = "none";
+                        const postEditing = divPost.querySelector("#textPost");
+                        postEditing.style.display = "block";
+                        btnEdit.innerHTML = "Edit";
+                    }
+                })
+            })
+        }
+
+
+
+
+        likebtn.addEventListener("click", async(event) => {
+            const idPost = event.target.parentNode.parentNode.id;
+            const postGet = await getPost(idPost);
+            if (postGet.data().usersLike.indexOf(localStorage.getItem("user")) === -1) {
+                likebtn.src = heartlike;
+                updateUserLike(idPost, localStorage.getItem("user"));
             } else {
-                await updatePost(idEvent, {
-                    "postDate": timeStamp,
-                    "postText": postEdit.value
-                });
-                postEdit.style.display = "none";
-                const postEditing = divPost.querySelector("#textPost");
-                postEditing.style.display = "block";
-                btnEdit.innerHTML = "Edit";
+                likebtn.src = heart;
+                updateRemoveLike(idPost, localStorage.getItem("user"));
             }
         })
-    })
-}
 
 
-
-
-likebtn.addEventListener("click", async(event) => {
-    const idPost = event.target.parentNode.parentNode.id;
-    const postGet = await getPost(idPost);
-    if (postGet.data().usersLike.indexOf(localStorage.getItem("user")) === -1) {
-        likebtn.src = heartlike;
-        updateUserLike(idPost, localStorage.getItem("user"));
-    } else {
-        likebtn.src = heart;
-        updateRemoveLike(idPost, localStorage.getItem("user"));
-    }
-})
-
-
-listPost.appendChild(divCollection);
-});
-return listPost;
+        listPost.appendChild(divCollection);
+    });
+    return listPost;
 }
 
 const createPost = async(post) => {
