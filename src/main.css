@@ -321,6 +321,7 @@
                 flex-direction: column;
                 align-items: center;
                 margin-top: 20vw;
+                margin-bottom: 12vw;
                 color: #333333;
             }
             
@@ -488,6 +489,25 @@
             .btnsPost {
                 display: flex;
                 justify-content: space-between;
+            }
+            
+            #settingsUser {
+                background: linear-gradient(270deg, #F1B048 0%, #DD5A6A 96.84%);
+                position: fixed;
+                z-index: 1000;
+                padding: 5%;
+                top: 10%;
+                height: 80px;
+                display: flex;
+                flex-direction: column;
+                justify-content: space-around;
+                color: white;
+                font-weight: 600;
+                align-items: center;
+                border-radius: 5px;
+                margin-left: 50%;
+                box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.5);
+                display: none;
             }
             
             @media screen and (min-width:800px) {
