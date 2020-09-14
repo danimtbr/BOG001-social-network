@@ -394,7 +394,7 @@
             
             #userInfoPost {
                 background: linear-gradient(270deg, #F1B048 0%, #DD5A6A 96.84%);
-                padding: 5%;
+                padding: 2%;
                 display: flex;
                 justify-content: space-around;
                 position: fixed;
@@ -407,6 +407,7 @@
                 width: 80%;
                 display: flex;
                 justify-content: space-between;
+                align-items: center;
             }
             
             #counterLikes {
@@ -424,6 +425,7 @@
             #userSessionName {
                 color: white;
                 font-weight: bold;
+                margin-left: 10%;
             }
             
             #formPost {
@@ -440,6 +442,12 @@
             #usernamePost {
                 font-weight: 600;
                 color: #E78559;
+                text-align: center;
+            }
+            
+            #contentImgAndUsername {
+                display: flex;
+                align-items: center;
             }
             /* Popup Delete --------------------------------> */
             
@@ -540,6 +548,7 @@
             #avatarUser {
                 width: 60px;
                 height: 60px;
+                border-radius: 100px;
             }
             
             .btnsPost {
@@ -616,6 +625,12 @@
                 font-size: 20px;
                 align-items: center;
                 padding-top: 20vw;
+            }
+            
+            #userAvatarProfile {
+                width: 80px;
+                height: 80px;
+                border-radius: 100px;
             }
             
             #contentInfoProfile {

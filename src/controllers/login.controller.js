@@ -43,6 +43,7 @@ export default () => {
         auth
             .signInWithEmailAndPassword(email, password)
             .then(userCredentials => {
+                console.log(userCredentials);
                 window.location.href = "#/posts"
             }).catch(err => {
                 let popupElement = divElement.querySelector("#divOverlay");
@@ -52,7 +53,7 @@ export default () => {
                 popupTittle.innerHTML = "Error:";
 
                 let popupMessage = divElement.querySelector("#textPopup");
-                popupMessage.innerHTML = "Email or password does not exist. Please try again.";
+                popupMessage.innerHTML = err.message;
             })
     })
 
@@ -69,6 +70,7 @@ export default () => {
                     console.log("signIn facebook");
                 })
                 .catch(err => {
+                    console.log(err);
                     let popupElement = divElement.querySelector("#divOverlay");
                     popupElement.classList.add("active");
 
@@ -76,7 +78,7 @@ export default () => {
                     popupTittle.innerHTML = "Error:";
 
                     let popupMessage = divElement.querySelector("#textPopup");
-                    popupMessage.innerHTML = "Could not authenticate by facebook. Please try again";
+                    popupMessage.innerHTML = err.message;
                 })
 
 
@@ -93,6 +95,7 @@ export default () => {
                 console.log("Google signIn");
             })
             .catch(err => {
+                console.log(err);
                 let popupElement = divElement.querySelector("#divOverlay");
                 popupElement.classList.add("active");
 
@@ -100,7 +103,7 @@ export default () => {
                 popupTittle.innerHTML = "Error:";
 
                 let popupMessage = divElement.querySelector("#textPopup");
-                popupMessage.innerHTML = "Could not authenticate by Google. Please try again";
+                popupMessage.innerHTML = err.message;
             })
 
     })

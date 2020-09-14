@@ -19,6 +19,9 @@ export default () => {
     divElement.classList = "mainViewPosts";
     divElement.innerHTML = viewPosts;
 
+    const imgAvatar = divElement.querySelector("#avatarUserViewPost");
+    imgAvatar.src = localStorage.getItem("urlUserImg");
+
     const imgSettings = divElement.querySelector("#settingsViewPosts");
     imgSettings.src = settings;
 
@@ -72,7 +75,7 @@ const printPosts = (listPost, querySnapshot) => {
         let postUserName = divCollection.querySelector("#usernamePost");
         postUserName.textContent = dataElement.userName;
         let userAvatar = divCollection.querySelector("#avatarUser");
-        userAvatar.src = avatar;
+        userAvatar.src = dataElement.userImgUrl || avatar;
         let postParagraph = divCollection.querySelector("#textPost");
         postParagraph.innerHTML = dataElement.postText;
         let divPost = divCollection.querySelector("#divPostId");

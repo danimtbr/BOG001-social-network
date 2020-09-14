@@ -12,6 +12,7 @@ auth.onAuthStateChanged((user) => {
     if (user) {
         localStorage.setItem("user", user.uid);
         localStorage.setItem("username", user.displayName);
+        localStorage.setItem("urlUserImg", user.photoURL);
         console.log("¡¡¡Logueado");
     } else {
         localStorage.removeItem("user");
@@ -20,5 +21,7 @@ auth.onAuthStateChanged((user) => {
         window.location.href = "#/";
     }
 });
+
+
 
 myFunction();
