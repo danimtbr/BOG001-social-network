@@ -28,6 +28,10 @@ const router = (route) => {
             {
                 return uId ? content.appendChild(pages.posts()) : content.appendChild(pages.default());
             }
+        case "#/newPost":
+            {
+                return uId ? content.appendChild(pages.textAreaPost()) : content.appendChild(pages.default());
+            }
         case "#/aboutus":
             {
                 return content.appendChild(pages.aboutUs());

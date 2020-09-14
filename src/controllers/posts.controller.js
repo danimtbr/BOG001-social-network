@@ -3,7 +3,14 @@ import collectionPost from "../views/postcollection.html";
 import { auth, database, timeStamp, arrayUnionFunction, arrayRemoveFunction } from "../init-firebase.js";
 import heartlike from "../img/heartlike.png";
 import heart from "../img/heart.png";
-import { pages } from "./pages.controller.js"
+import settings from "../img/settings.png";
+import newPost from "../img/btnpost.png";
+import avatar from "../img/avatar3.png";
+import imgDelete from "../img/trash.png";
+import imgEdit from "../img/edit-2.png";
+import imgUpdate from "../img/edit-1.png";
+import { pages } from "./pages.controller.js";
+import { onGetPost, getPost, updatePost, updateUserLike, updateRemoveLike, popUpDelete } from "../lib/index.js";
 
 export default () => {
 
@@ -12,12 +19,25 @@ export default () => {
     divElement.classList = "mainViewPosts";
     divElement.innerHTML = viewPosts;
 
+    const imgSettings = divElement.querySelector("#settingsViewPosts");
+    imgSettings.src = settings;
+
     const username = divElement.querySelector("#userSessionName");
-    console.log(username);
     username.textContent = localStorage.getItem("username").toString();
 
+    const imgPostNew = divElement.querySelector("#imgNewPost");
+    imgPostNew.src = newPost;
 
     divElement.appendChild(pages.popupdelete());
+
+
+    const menuSettingsUser = divElement.querySelector("#settingsUser")
+    const settingsUser = divElement.querySelector("#settingsViewPosts");
+    settingsUser.addEventListener("click", () => {
+        console.log(menuSettingsUser.style.display);
+        menuSettingsUser.style.display == "none" || "" ? menuSettingsUser.style.display = "flex" : menuSettingsUser.style.display = "none";
+    })
+
 
     const logout = divElement.querySelector("#btnLogout");
     logout.addEventListener("click", (event) => {
@@ -27,25 +47,10 @@ export default () => {
         })
     })
 
-    const postForm = divElement.querySelector("#formPost");
-
-    postForm.addEventListener("submit", async event => {
-        event.preventDefault();
-        const postText = postForm["textPost"];
-        if (postText.value === "") {
-            alert("Your post is empty");
-        } else {
-            await createPost(postText.value);
-            postForm.reset();
-            postForm.focus();
-        }
-    });
-
-
-
     onGetPost((querySnapshot) => {
         const orderPosts = divElement.querySelector("#listPosts");
         const listPostPrint = printPosts(orderPosts, querySnapshot);
+        setEvents(listPostPrint);
         orderPosts.replaceWith(listPostPrint);
     })
 
@@ -53,12 +58,7 @@ export default () => {
     return divElement;
 }
 
-const onGetPost = (callback) => database.collection("posts").orderBy("postDate", "desc").onSnapshot(callback);
-const deletePost = (id) => database.collection("posts").doc(id).delete();
-const getPost = (id) => database.collection("posts").doc(id).get();
-const updatePost = (id, updateTextPost) => database.collection("posts").doc(id).update(updateTextPost);
-const updateUserLike = (id, userLikeId) => database.collection("posts").doc(id).update({ usersLike: arrayUnionFunction(userLikeId) });
-const updateRemoveLike = (id, userLikeId) => database.collection("posts").doc(id).update({ usersLike: arrayRemoveFunction(userLikeId) });
+
 
 const printPosts = (listPost, querySnapshot) => {
     listPost.innerHTML = "";
@@ -71,81 +71,56 @@ const printPosts = (listPost, querySnapshot) => {
         divCollection.innerHTML = collectionPost;
         let postUserName = divCollection.querySelector("#usernamePost");
         postUserName.textContent = dataElement.userName;
+        let userAvatar = divCollection.querySelector("#avatarUser");
+        userAvatar.src = avatar;
         let postParagraph = divCollection.querySelector("#textPost");
         postParagraph.innerHTML = dataElement.postText;
         let divPost = divCollection.querySelector("#divPostId");
         divPost.id = dataElement.id;
         let textLikes = divCollection.querySelector("#counterLikes");
         textLikes.innerHTML = dataElement.usersLike.length + "Likes";
-        const deleteButtons = divCollection.querySelectorAll(".deletePost");
-        const deleteButtonId = divCollection.querySelector("#deletePostButton")
+        let deleteButtons = divCollection.querySelectorAll(".deletePost");
+        const deleteButtonId = divCollection.querySelector("#deletePostButton");
+        deleteButtonId.src = imgDelete;
         const likebtn = divCollection.querySelector("#like");
-        const idPopUp = document.querySelector("#deleteIdPopup");
-        console.log(idPopUp);
+
+        let idPopUp = document.querySelector("#deleteIdPopup");
         if (dataElement.usersLike.indexOf(userSessionNow) === -1) {
             likebtn.src = heart;
         } else {
             likebtn.src = heartlike;
         }
+        const btnEdit = divPost.querySelector("#editPostButton");
+        btnEdit.src = imgEdit;
+
+        // ------------------ POPUP DELETE ---------------------->
         if (dataElement.userId === userSessionNow) {
             deleteButtonId.style.display = "block";
-            deleteButtons.forEach(button => {
-                // button.addEventListener("click") => {
-                idPopUp.classList.add("active");
-                const deleteButtonPopUp = document.querySelector("#btnDelete");
-                deleteButtonPopUp.addEventListener("click", async(event) => {
-                    await deletePost(event.target.parentNode.parentNode.parentNode.id);
-                    idPopUp.classList.remove("active");
-                })
-            })
+            deleteButtons = listenerLaunchDelete(deleteButtons, idPopUp);
+            btnEdit.style.display = "block";
+            let editButtons = divCollection.querySelectorAll(".editPost");
+            editButtons = listenerEdit(editButtons, divPost);
+            // deleteButtons.forEach(button => {
+            //     button.addEventListener("click", (event) => {
+            //         idPopUp.classList.add("active");
+            //         confirmPostId = event.target.parentNode.parentNode.parentNode.parentNode.id;
+            //     })
+            // })
         }
 
-        const editButtonId = divCollection.querySelector("#editPostButton");
-        if (dataElement.userId === userSessionNow) {
-            editButtonId.style.display = "block";
-            const editButtons = divCollection.querySelectorAll(".editPost");
-            editButtons.forEach(button => {
-                button.addEventListener("click", async(event) => {
-                    const idEvent = event.target.parentNode.parentNode.parentNode.id;
-                    console.log(idEvent)
-                    const postGet = await getPost(idEvent);
-                    let divPost = divCollection.querySelector("#" + idEvent);
-                    const btnEdit = divPost.querySelector("#editPostButton");
-                    const postEditing = divPost.querySelector("#textPost");
-                    const postEdit = divPost.querySelector("#editPost");
-                    if (btnEdit.innerHTML === "Edit") {
-                        postEditing.style.display = "none";
-                        postEdit.value = postGet.data().postText;
-                        postEdit.style.display = "block";
-                        btnEdit.innerHTML = "Update";
-                    } else {
-                        await updatePost(idEvent, {
-                            "postDate": timeStamp,
-                            "postText": postEdit.value
-                        });
-                        postEdit.style.display = "none";
-                        const postEditing = divPost.querySelector("#textPost");
-                        postEditing.style.display = "block";
-                        btnEdit.innerHTML = "Edit";
-                    }
-                })
-            })
-        }
+        // ----------- FUNCTION LISTENER DELETE ----------------->
+        idPopUp = listenerDelete(idPopUp);
 
 
 
 
-        likebtn.addEventListener("click", async(event) => {
-            const idPost = event.target.parentNode.parentNode.id;
-            const postGet = await getPost(idPost);
-            if (postGet.data().usersLike.indexOf(localStorage.getItem("user")) === -1) {
-                likebtn.src = heartlike;
-                updateUserLike(idPost, localStorage.getItem("user"));
-            } else {
-                likebtn.src = heart;
-                updateRemoveLike(idPost, localStorage.getItem("user"));
-            }
-        })
+        // if (dataElement.userId === userSessionNow) {
+        //     btnEdit.style.display = "block";
+        //     let editButtons = divCollection.querySelectorAll(".editPost");
+        //     listenerEdit(editButtons);
+        // }
+
+
 
 
         listPost.appendChild(divCollection);
@@ -153,12 +128,92 @@ const printPosts = (listPost, querySnapshot) => {
     return listPost;
 }
 
-const createPost = async(post) => {
-    await database.collection("posts").doc().set({
-        "userId": localStorage.getItem("user"),
-        "userName": localStorage.getItem("username"),
-        "postDate": timeStamp,
-        "postText": post,
-        "usersLike": new Array()
+const listenerDelete = (popupObject) => {
+    popupObject.addEventListener("click", async(event) => {
+        if (event.target.id === "btnDelete") {
+            await popUpDelete(confirmPostId);
+            popupObject.classList.remove("active");
+        }
     })
+    return popupObject;
 }
+
+const listenerLaunchDelete = (listDeleteImg, popupObject) => {
+    listDeleteImg.forEach(button => {
+        button.addEventListener("click", (event) => {
+            popupObject.classList.add("active");
+            confirmPostId = event.target.parentNode.parentNode.parentNode.parentNode.id;
+        })
+    })
+    return listDeleteImg;
+}
+
+
+const listenerEdit = (listEditing, postContainer) => {
+    listEditing.forEach(button => {
+        button.addEventListener("click", async(event) => {
+            const idEvent = event.target.parentNode.parentNode.parentNode.parentNode.id;
+            const postGet = await getPost(idEvent);
+            //let divPost = listCollection.querySelector("#" + idEvent);
+            const postEditing = postContainer.querySelector("#textPost");
+            const postEdit = postContainer.querySelector("#editPost");
+            if (editingPost === false) {
+                postEditing.style.display = "none";
+                postEdit.value = postGet.data().postText;
+                postEdit.style.display = "block";
+                //btnEdit.src = imgUpdate;
+                event.target.src = imgUpdate;
+                editingPost = true;
+            } else {
+                await updatePost(idEvent, {
+                    "postDate": timeStamp,
+                    "postText": postEdit.value
+                });
+                postEdit.style.display = "none";
+                //const postEditing = divPost.querySelector("#textPost");
+                postEditing.style.display = "block";
+                //btnEdit.src = imgEdit;
+                event.target.src = imgEdit;
+                editingPost = false;
+            }
+        })
+    })
+
+    return listEditing;
+}
+
+
+const listenerLike = (listLikeImg) => {
+    listLikeImg.forEach(button => {
+        button.addEventListener("click", async(event) => {
+            const idPost = event.target.parentNode.parentNode.parentNode.parentNode.id;
+            const postGet = await getPost(idPost);
+            if (postGet.data().usersLike.indexOf(localStorage.getItem("user")) === -1) {
+                event.target.src = heartlike;
+                updateUserLike(idPost, localStorage.getItem("user"));
+            } else {
+                event.target.src = heart;
+                updateRemoveLike(idPost, localStorage.getItem("user"));
+            }
+        });
+    });
+    return listLikeImg;
+}
+
+const setEvents = (postsList) => {
+    let listImgLikes = postsList.querySelectorAll(".btnLikePost");
+    listImgLikes = listenerLike(listImgLikes);
+}
+
+let confirmPostId = "";
+let editingPost = false;
+
+// const createPost = async(post) => {
+//     await database.collection("posts").doc().set({
+//         "userId": localStorage.getItem("user"),
+//         "userName": localStorage.getItem("username"),
+//         "postDate": timeStamp,
+//         "postText": post,
+//         "usersLike": new Array()
+//     })
+// }

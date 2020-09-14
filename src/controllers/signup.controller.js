@@ -3,7 +3,7 @@ import logoView3 from "../img/logo.png";
 import faceImg from "../img/facebook.png";
 import googleImg from "../img/google.png";
 import { pages } from "./pages.controller.js";
-import { auth } from "../init-firebase.js";
+import { auth, firebase } from "../init-firebase.js";
 
 export default () => {
 
@@ -35,24 +35,44 @@ export default () => {
         const signUpPassword = divElement.querySelector("#password").value;
         const signUpConfirmPassword = divElement.querySelector("#confirmPass").value;
 
+        const actionCodeSettings = { url: 'https://hibooklab.page.link/QXTh', dynamicLinkDomain: 'hibooklab.page.link' };
+
         if (signUpPassword === signUpConfirmPassword) {
             auth
                 .createUserWithEmailAndPassword(signUpEmail, signUpPassword)
                 .then(userCredentials => {
                     userCredentials.user.updateProfile({
-                        displayName: signUpUserName
-                    }).then(function() {
-                        window.location.href = "#/avatar";
-                    }).catch(function(error) {
-                        alert("Authentication Failed");
-                    });
+                            displayName: signUpUserName
+                        }).then(() => {
+                            const userVerfication = firebase.auth().currentUser;
+                            userVerfication.sendEmailVerification(actionCodeSettings)
+                                .then(() => {
+                                    alert("Email sent");
+                                })
+                        })
+                        .catch((error) => {
+                            alert("Authentication Failed");
+                        });
                 })
+
+
+
+
+            // const userVerfication = firebase.auth().currentUser;
+            // console.log(userVerfication);
+            // userVerfication.sendEmailVerification(actionCodeSettings).then(function() {
+            //     alert("Email sent");
+            // }).catch(function(error) {
+            //     alert("Authentication Failed");
+            // })
+
         } else {
             let spanInvalid = divElement.querySelector("#invalidPass");
             spanInvalid.textContent = "Your password and confirmation password do not match, please try again"
         }
 
     })
+
 
     // Login FaceBook ------------------------------------------------------>
     const signUpFacebook = divElement.querySelector("#signUpFace");

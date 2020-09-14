@@ -1,21 +1,26 @@
 <div class="contentPost" id="divPostId">
     <div class="contentNameButton">
+        <img id="avatarUser">
         <span id="usernamePost">Sofi</span>
-        <div class="contentButtons">
-            <button class="editPost" id="editPostButton" data-id="dataid">Edit</button>
-            <button class="deletePost" id="deletePostButton" data-id="dataid">Delete</button>
+    </div>
+
+
+    <div class="contentPostBtns">
+        <p id="textPost"></p>
+        <textarea class="editPostArea" id="editPost" cols="30" rows="2"></textarea>
+        <p id="labelStatus"></p>
+        <div class="btnsPost">
+            <div class="contentButtons">
+                <img class="deletePost" id="deletePostButton" data-id="dataid">
+                <!-- <button class="deletePost" id="deletePostButton" data-id="dataid">Delete</button> -->
+                <!-- <button class="editPost" id="editPostButton" data-id="dataid"> <img id="imgEdit">Edit</button> -->
+                <img class="editPost" id="editPostButton" data-id="dataid">
+            </div>
+            <div id="contentLikes">
+                <img class="btnLikePost" id="like">
+                <span id="counterLikes">0 Likes</span>
+            </div>
         </div>
     </div>
-    <p id="textPost"></p>
-    <textarea class="editPostArea" id="editPost" cols="30" rows="2"></textarea>
-    <p id="labelStatus"></p>
-    <div id="contentLikes">
-        <img id="like">
-        <span id="counterLikes">0 Likes</span>
-    </div>
-    <!--Mostrar popup para comentarios asociado al evento click en el btn comment--- 
-    <Mostrar popup para comentarios asociado al evento click en el btn viewComments----->
-    <!-- <button id="viewComments">View Comments</button>
-    <button id="comment">Comment</button> -->
 </div>
 <hr id="linePost">
