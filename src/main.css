@@ -505,6 +505,83 @@
                 margin-bottom: 20px;
             }
             
+            #aboutUs {
+                display: flex;
+                top: 20px;
+                position: absolute;
+                width: 188px;
+                left: 98px;
+                font-family: Roboto;
+                font-size: 20px;
+                text-align: center;
+                color: #EFA840;
+            }
+            
+            #descriptionAboutUsFirst {
+                top: 100px;
+                left: 30px;
+                position: absolute;
+                width: 279px;
+                line-height: 18px;
+                font-family: Roboto;
+                font-size: 14px;
+                text-align: center;
+                color: #969696;
+            }
+            
+            #imgAboutView {
+                position: relative;
+                top: 170px;
+                width: 350px;
+                height: 350px;
+                display: flex;
+                align-content: flex-end;
+                right: 20px;
+            }
+            
+            #secondAbout {
+                bottom: 100px;
+                left: 30px;
+                position: absolute;
+                width: 279px;
+                font-family: Roboto;
+                font-size: 14px;
+                text-align: center;
+                color: #969696;
+            }
+            
+            #rectangleAbout {
+                bottom: 0px;
+                position: absolute;
+                width: max-content;
+                height: 70px;
+            }
+            
+            #madeInc {
+                position: absolute;
+                width: 278px;
+                height: 34px;
+                font-family: Roboto;
+                font-size: 12px;
+                text-align: center;
+                right: 40px;
+                bottom: 28px;
+                color: white;
+            }
+            
+            .names {
+                width: 278px;
+                height: 18px;
+                font-family: Roboto;
+                font-size: 11px;
+                text-align: center;
+                right: 40px;
+                color: white;
+                position: absolute;
+                bottom: 28px;
+<<<<<<< HEAD
+=======
+              
             #imgNewPost {
                 border-radius: 100%;
                 position: fixed;
@@ -564,6 +641,8 @@
                 margin-left: 50%;
                 box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.5);
                 display: none;
+
+>>>>>>> bacc7d6961e71548ad3001014e6aecd86c7677e2
             }
             
             #divNewPost {
