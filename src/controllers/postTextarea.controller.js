@@ -1,5 +1,7 @@
 import viewTextareaPost from "../views/postTextarea.html";
 import { createPost } from "../lib/index.js";
+import avatarUser from "../img/avatar3.png";
+import { pages } from "./pages.controller.js";
 
 export default () => {
 
@@ -8,20 +10,43 @@ export default () => {
     divElement.classList = "textAreaPosts";
     divElement.innerHTML = viewTextareaPost;
 
+    divElement.appendChild(pages.popups());
+
+    const imgUser = divElement.querySelector("#userImgTextarea");
+    imgUser.src = avatarUser;
 
 
     const postForm = divElement.querySelector("#formPost");
-
-    postForm.addEventListener("submit", async event => {
+    const btnSavePost = divElement.querySelector("#save1");
+    btnSavePost.addEventListener("click", async event => {
         event.preventDefault();
         const postText = postForm["textPost"];
         if (postText.value === "") {
-            alert("Your post is empty");
+            let popupElement = divElement.querySelector("#divOverlay");
+            popupElement.classList.add("active");
+
+            let popupTittle = divElement.querySelector("#tittlePopup");
+            popupTittle.innerHTML = "Error:";
+
+            let popupMessage = divElement.querySelector("#textPopup");
+            popupMessage.innerHTML = "Your post is empty";
         } else {
             await createPost(postText.value);
             window.location.href = "#/posts"
         }
     });
+
+    //const postForm = divElement.querySelector("#formPost");
+    // postForm.addEventListener("submit", async event => {
+    //         event.preventDefault();
+    //         const postText = postForm["textPost"];
+    //         if (postText.value === "") {
+    //             alert("Your post is empty");
+    //         } else {
+    //             await createPost(postText.value);
+    //             window.location.href = "#/posts"
+    //         }
+    //     });
 
     return divElement
 

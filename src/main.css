@@ -41,7 +41,7 @@
                 border-color: #F19048;
                 color: #F19048;
                 font-size: 20px;
-                font-family: Roboto;
+                font-family: "Roboto", sans-serif;
                 text-decoration: none;
             }
             
@@ -53,15 +53,15 @@
                 background: linear-gradient(270deg, #F1B048 0%, #DD5A6A 96.84%);
                 box-shadow: 0px 4.3937px 4.3937px rgba(0, 0, 0, 0.25);
                 border-radius: 21.9685px;
-                border-color: white;
+                border: none;
                 color: white;
                 font-size: 20px;
-                font-family: Roboto;
+                font-family: "Roboto", sans-serif;
             }
             
             #aboutHiBook,
             #contactUs {
-                font-family: Roboto;
+                font-family: "Roboto", sans-serif;
                 font-style: normal;
                 font-weight: 500;
                 font-size: 18px;
@@ -138,7 +138,7 @@
             .inputView3 {
                 border: none;
                 outline: none;
-                font-family: roboto;
+                font-family: "Roboto", sans-serif;
                 text-align: center;
             }
             
@@ -148,7 +148,7 @@
                 height: 28px;
                 left: 264px;
                 top: 215px;
-                font-family: Roboto;
+                font-family: "Roboto", sans-serif;
                 font-style: normal;
                 font-weight: normal;
                 font-size: 24px;
@@ -163,7 +163,7 @@
                 height: 28px;
                 left: 200px;
                 top: 180px;
-                font-family: Roboto;
+                font-family: "Roboto", sans-serif;
                 font-size: 24px;
                 line-height: 28px;
                 text-align: center;
@@ -171,7 +171,7 @@
             }
             
             .spanView3 {
-                font-family: roboto;
+                font-family: "Roboto", sans-serif;
                 color: #333333;
             }
             
@@ -188,10 +188,10 @@
                 background: linear-gradient(270deg, #F1B048 0%, #DD5A6A 96.84%);
                 box-shadow: 0px 4.3937px 4.3937px rgba(0, 0, 0, 0.25);
                 border-radius: 21.9685px;
-                border-color: white;
+                border: none;
                 color: white;
                 font-size: 20px;
-                font-family: Roboto;
+                font-family: "Roboto", sans-serif;
                 margin-top: 50px;
             }
             
@@ -253,6 +253,7 @@
                 font-weight: 700;
                 color: #DD5A6A;
             }
+            /* PopUps ----------------------------------------------> */
             
             .overlay {
                 background: rgba(0, 0, 0, 0.3);
@@ -275,20 +276,38 @@
                 background: white;
                 box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.3);
                 border-radius: 5px;
-                font-family: 'Lora', Serif;
+                font-family: 'Roboto', Serif;
                 padding: 20px;
                 text-align: center;
                 width: 200px;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
             }
             
             .popup .btnClosePopup {
                 display: block;
                 text-align: right;
-                opacity: 60%;
             }
             
-            .popup .btnClosePopup:hover {
-                opacity: 100%
+            #tittlePopup {
+                margin-bottom: 0px;
+            }
+            
+            #textPopup {
+                margin-bottom: 20px;
+            }
+            
+            #closePopup {
+                background: linear-gradient(270deg, #F1B048 0%, #DD5A6A 96.84%);
+                box-shadow: 0px 4.3937px 4.3937px rgba(0, 0, 0, 0.25);
+                border-radius: 21.9685px;
+                color: white;
+                font-size: 15px;
+                font-family: "Roboto", sans-serif;
+                padding: 5px;
+                border: none;
+                width: 100px;
             }
             
             .editPostArea {
@@ -358,11 +377,15 @@
             }
             
             #containerPost {
-                font-family: roboto, serif;
+                font-family: "Roboto", serif;
             }
             
             #textPost {
                 font-family: 'Lora', Serif;
+                padding-top: 6vw;
+                width: 90%;
+                border: none;
+                outline: none;
             }
             
             #like {
@@ -378,6 +401,12 @@
                 width: 100%;
                 top: 0;
                 z-index: 1000;
+            }
+            
+            #contentInfoUser {
+                width: 80%;
+                display: flex;
+                justify-content: space-between;
             }
             
             #counterLikes {
@@ -401,21 +430,18 @@
                 display: flex;
                 flex-direction: column;
                 align-items: center;
+                padding-top: 20vw;
             }
             
             #save {
                 width: 20%;
             }
             
-            #textPost {
-                width: 98%;
-                border-color: #DD5A6A;
-            }
-            
             #usernamePost {
                 font-weight: 600;
                 color: #E78559;
             }
+            /* Popup Delete --------------------------------> */
             
             .divViewPopUpDelete {
                 background: rgba(0, 0, 0, 0.3);
@@ -438,15 +464,45 @@
                 background: white;
                 box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.3);
                 border-radius: 5px;
-                font-family: 'Lora', Serif;
+                font-family: 'Roboto', Serif;
                 padding: 20px;
                 text-align: center;
                 width: 200px;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
             }
             
-            .deleteAlert.btnCancel {
-                display: block;
-                text-align: right;
+            #btnCancel {
+                background: linear-gradient(270deg, #F1B048 0%, #DD5A6A 96.84%);
+                box-shadow: 0px 4.3937px 4.3937px rgba(0, 0, 0, 0.25);
+                border-radius: 21.9685px;
+                color: white;
+                font-size: 15px;
+                font-family: "Roboto", sans-serif;
+                padding: 5px;
+                border: none;
+                width: 80px;
+            }
+            
+            #btnDelete {
+                background: white;
+                box-shadow: 0px 4.3937px 4.3937px rgba(0, 0, 0, 0.25);
+                border-radius: 21.9685px;
+                border-color: #EDA14E;
+                color: #E06665;
+                font-size: 15px;
+                font-family: "Roboto", sans-serif;
+                padding: 5px;
+                width: 80px;
+            }
+            
+            #tittleAlert {
+                margin-bottom: 0px;
+            }
+            
+            #spanAlert {
+                margin-bottom: 20px;
             }
             
             #aboutUs {
@@ -589,6 +645,202 @@
 >>>>>>> bacc7d6961e71548ad3001014e6aecd86c7677e2
             }
             
+            #divNewPost {
+                background: linear-gradient(270deg, #F1B048 0%, #DD5A6A 96.84%);
+                padding: 5%;
+                display: flex;
+                justify-content: space-around;
+                position: fixed;
+                width: 100%;
+                top: 0;
+                z-index: 1000;
+                color: white;
+                font-family: "roboto", sans-serif;
+                font-weight: 600;
+            }
+            
+            #userImgTextarea {
+                width: 60px;
+                height: 60px;
+                padding-top: 20vw;
+            }
+            
+            #newPost {
+                display: flex;
+                justify-content: center;
+            }
+            
+            #aLink {
+                text-decoration: none;
+                color: white;
+            }
+            
+            #btnsNewPost {
+                width: 80%;
+                display: flex;
+                justify-content: space-between;
+            }
+            
+            #btnEdit {
+                text-decoration: none;
+                color: white;
+            }
+            
+            #divAvatarUsername {
+                display: flex;
+                justify-content: center;
+                color: #DD5A6A;
+                font-family: "roboto", sans-serif;
+                font-weight: 600;
+                font-size: 20px;
+                align-items: center;
+                padding-top: 20vw;
+            }
+            
+            #contentInfoProfile {
+                width: 90%;
+                display: flex;
+                align-items: center;
+                flex-direction: column;
+                font-family: "roboto", sans-serif;
+                margin-left: 5%;
+            }
+            
+            .tittleProfile {
+                color: #DD5A6A;
+                width: 65%;
+                padding-top: 10%;
+            }
+            
+            .textProfile {
+                color: #333333;
+                padding: 10px;
+                font-family: "roboto", sans-serif;
+                text-align: center;
+                border: none;
+                background: white;
+            }
+            
+            #headProfile {
+                background: linear-gradient(270deg, #F1B048 0%, #DD5A6A 96.84%);
+                padding: 5%;
+                display: flex;
+                justify-content: space-around;
+                position: fixed;
+                width: 100%;
+                top: 0;
+                z-index: 1000;
+                color: white;
+                font-family: "roboto", sans-serif;
+                font-weight: 600;
+            }
+            
+            #backProfile {
+                text-decoration: none;
+                color: white;
+                width: 90%;
+            }
+            
+            #btnEditProfile {
+                background: linear-gradient(90deg, #E16D62 0%, #F1AD49 104.15%);
+                border-radius: 20px;
+                width: 100px;
+                padding: 12px;
+                border: none;
+                color: white;
+                font-weight: 600;
+                margin-top: 50px;
+                outline: none;
+                box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.5);
+            }
+            
+            #contentPhrase {
+                width: 80%;
+                margin-left: 10%;
+                font-family: "Lora", sans-serif;
+                font-size: small;
+                color: #8F8D8D;
+                padding-top: 10vw;
+            }
+            
+            #phraseProfile {
+                color: #DD5A6A;
+            }
+            
+            #contentAboutUs {
+                width: 80%;
+                margin-left: 10%;
+                padding-top: 5vw;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                font-family: "roboto", sans-serif;
+                color: #333333;
+            }
+            
+            #contentSkip {
+                height: 50px;
+                display: flex;
+                justify-content: flex-end;
+                align-items: flex-end;
+                width: 90%;
+            }
+            
+            #btnSkip {
+                color: #F5B666;
+                font-weight: 600;
+                font-family: "roboto", sans-serif;
+            }
+            
+            #tittleAbout {
+                color: #F5B666;
+            }
+            
+            .pAbout {
+                text-align: center;
+            }
+            
+            #contentContactImg {
+                padding: 50px;
+                display: flex;
+                width: 80%;
+            }
+            
+            .contact {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+            
+            .aboutViewDefault {
+                text-decoration: none;
+            }
+            
+            .contactName {
+                color: #969696;
+            }
+            
+            #contentUbication {
+                display: flex;
+                font-size: smaller;
+                padding: 20px;
+            }
+            
+            #linkUbication {
+                text-decoration: none;
+                color: #969696;
+            }
+            
+            #spanCreateAccSecond {
+                text-decoration: none;
+            }
+            
+            #phraseViewSignUp,
+            #phraseViewLogin {
+                display: none;
+            }
+            
             @media screen and (min-width:800px) {
                 body {
                     margin: 0;
@@ -675,14 +927,14 @@
                 #contentView3 {
                     display: flex;
                     align-items: center;
-                    flex-direction: column;
+                    /* flex-direction: column; */
                     margin-top: 0px;
                     padding: 50px;
                     border: #F19048 2px solid;
                     border-radius: 15px;
                 }
                 #formView2 {
-                    margin-top: 100px;
+                    margin-top: 0px;
                 }
                 #logoView2 {
                     position: relative;
@@ -691,13 +943,15 @@
                 }
                 #singUpView3 {
                     position: relative;
-                    top: 30px;
-                    left: 0px;
+                    left: 250px;
+                    top: -180px;
+                    font-weight: 600;
                 }
                 #loginView2 {
                     position: relative;
-                    top: 60px;
-                    left: 0px;
+                    top: -20px;
+                    left: 180px;
+                    font-weight: 600;
                 }
                 #faceButton {
                     margin-right: 30px;
@@ -706,6 +960,20 @@
                     position: absolute;
                     left: 0px;
                     width: 80%;
+                    font-size: small;
+                }
+                #phraseViewSignUp,
+                #phraseViewLogin {
+                    display: flex;
+                    padding-bottom: 50px;
+                    flex-direction: column;
+                    align-items: center;
+                    font-family: "roboto", sans-serif;
+                    font-weight: 600;
+                    color: #736F6F;
+                }
+                #span2ViewSignUp,
+                #span2ViewLogin {
                     font-size: small;
                 }
             }

@@ -1,5 +1,5 @@
 import viewPopups from "../views/popups.html";
-
+import errorImg from "../img/oops.png";
 
 
 export default () => {
@@ -7,6 +7,9 @@ export default () => {
     divElement.id = "divOverlay";
     divElement.classList = "overlay";
     divElement.innerHTML = viewPopups;
+
+    const imgError = divElement.querySelector("#errorImg");
+    imgError.src = errorImg;
 
     const buttonClose = divElement.querySelector("#closePopup");
     buttonClose.addEventListener("click", (event) => {
