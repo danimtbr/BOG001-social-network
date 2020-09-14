@@ -75,7 +75,7 @@ export default () => {
 
 
     // Login FaceBook ------------------------------------------------------>
-    const signUpFacebook = divElement.querySelector("#signUpFace");
+    const signUpFacebook = divElement.querySelector("#faceButton");
     signUpFacebook.addEventListener("click", event => {
             event.preventDefault();
             const provider = new firebase.auth.FacebookAuthProvider();
@@ -94,11 +94,9 @@ export default () => {
                     let popupMessage = divElement.querySelector("#textPopup");
                     popupMessage.innerHTML = "Could not authenticate by facebook. Please try again";
                 })
-
-
         })
         // Login Google -------------------------------------------->
-    const signUpGoogle = divElement.querySelector("#signUpGoogle");
+    const signUpGoogle = divElement.querySelector("#googleButton");
     signUpGoogle.addEventListener("click", event => {
         event.preventDefault();
         const provider = new firebase.auth.GoogleAuthProvider();
@@ -108,6 +106,7 @@ export default () => {
                 console.log("Google signIn");
             })
             .catch(err => {
+                console.log(err);
                 let popupElement = divElement.querySelector("#divOverlay");
                 popupElement.classList.add("active");
 
@@ -115,9 +114,8 @@ export default () => {
                 popupTittle.innerHTML = "Error:";
 
                 let popupMessage = divElement.querySelector("#textPopup");
-                popupMessage.innerHTML = "Could not authenticate by Google. Please try again later";
+                popupMessage.innerHTML = "Could not authenticate by Google. Please try again";
             })
-
     })
     return divElement;
 }
