@@ -29,20 +29,22 @@
 
 ### 3. Low fidelity prototype
 
-<p align="center"><img src="src/img/readme/lowprototype.jpg" width="500" style="box-shadow: 5px 10px 8px #00000011"></p>
+<p align="center"><img src="src/img/readme/lowprototype.PNG" width="500" style="box-shadow: 5px 10px 8px #00000011"></p>
 
 
 #### 4. High fidelity prototype
 
 ##### Mobile
-<p align="center"> <img src="src/img/readme/mobile1.png" width="300" style="margin:10px"> <img style="margin:10px" src="src/img/readme/mobile2.png" width="300"> <img style="margin:10px" src="src/img/readme/mobile3.png" width="300"> <img style="margin:10px" src="src/img/readme/mobile4.png" width="300"> <img style="margin:10px" src="src/img/readme/mobile5.png" width="300"> <img style="margin:10px" src="src/images/readme/mobile6.png" width="300"> <img style="margin:10px" src="src/images/readme/mobile7.png" width="300"> <img style="margin:10px" src="src/images/readme/mobile8.png" width="300"></p>
+<p align="center"> <img src="src/img/readme/mobile1.PNG" width="300" style="margin:10px"> <img style="margin:10px" src="src/img/readme/mobile2.PNG" width="300"> <img style="margin:10px" src="src/img/readme/mobile3.PNG" width="300"> <img style="margin:10px" src="src/img/readme/mobile4.PNG" width="300"> <img style="margin:10px" src="src/img/readme/mobile5.PNG" width="300"> <img style="margin:10px" src="src/img/readme/mobile6.PNG" width="300"> <img style="margin:10px" src="src/img/readme/mobile7.PNG" width="300"> <img style="margin:10px" src="src/img/readme/mobile8.png" width="300"></p>
 
 ##### Web
-<p align="center"> <img src="src/img/readme/desktop1.jpg" width="500" style="margin:10px"> <img style="margin:10px" src="src/img/readme/desktop2" width="500"> <img style="margin:10px" src="src/img/readme/desktop3.png" width="500"> <img style="margin:10px" src="src/img/readme/desktop4.png" width="500"> <img src="src/img/readme/desktop5.jpg" width="500" style="margin:10px"> <img src="src/img/readme/desktop6.jpg" width="500" style="margin:10px"></p>
+<p align="center"> <img src="src/img/readme/desktop1.PNG" width="500" style="margin:10px"> <img style="margin:10px" src="src/img/readme/desktop2.PNG" width="500"> <img style="margin:10px" src="src/img/readme/desktop3.PNG" width="500"> <img style="margin:10px" src="src/img/readme/desktop4.PNG" width="500"> <img src="src/img/readme/desktop5.PNG" width="500" style="margin:10px"> <img src="src/img/readme/desktop6.PNG" width="500" style="margin:10px"></p>
 
 
 ##### 5. Boilerplate
 
+<pre lang= "text">
+<code>
 ├── Readme.md
 ├── .vscode
 ├── dist
@@ -82,6 +84,8 @@
 └── test
 |    └── index.spec.js
 |──webpack.config.js
+</code>
+</pre>
 
 
 ###### 6. Learning goals checklist

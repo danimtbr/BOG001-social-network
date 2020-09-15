@@ -13,7 +13,10 @@ export default () => {
     divElement.appendChild(pages.popups());
 
     const imgUser = divElement.querySelector("#userImgTextarea");
-    imgUser.src = avatarUser;
+    imgUser.src = localStorage.getItem("urlUserImg");
+
+    divElement.querySelector("#textPost").placeholder = localStorage.getItem("username") + ", what are you thinking " + "?";
+
 
 
     const postForm = divElement.querySelector("#formPost");
@@ -35,18 +38,6 @@ export default () => {
             window.location.href = "#/posts"
         }
     });
-
-    //const postForm = divElement.querySelector("#formPost");
-    // postForm.addEventListener("submit", async event => {
-    //         event.preventDefault();
-    //         const postText = postForm["textPost"];
-    //         if (postText.value === "") {
-    //             alert("Your post is empty");
-    //         } else {
-    //             await createPost(postText.value);
-    //             window.location.href = "#/posts"
-    //         }
-    //     });
 
     return divElement
 

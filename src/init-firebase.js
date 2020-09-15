@@ -1,6 +1,7 @@
 import * as firebase from "firebase/app";
 import "firebase/auth";
 import "firebase/firestore";
+import "firebase/storage";
 
 var firebaseConfig = {
     apiKey: "AIzaSyCNU_2E0vH-XPBk3tqkrckPG_IowYbxrpU",
@@ -15,6 +16,7 @@ var firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 const auth = firebase.auth();
 const database = firebase.firestore();
+const storage = firebase.storage().ref();
 const timeStamp = firebase.firestore.FieldValue.serverTimestamp();
 
 const arrayUnionFunction = (userId) => {
@@ -32,4 +34,4 @@ const arrayRemoveFunction = (userId) => {
 
 
 
-export { auth, database, timeStamp, arrayUnionFunction, arrayRemoveFunction, firebase }
+export { auth, database, storage, timeStamp, arrayUnionFunction, arrayRemoveFunction, firebase }

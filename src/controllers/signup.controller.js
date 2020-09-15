@@ -44,7 +44,7 @@ export default () => {
                     userCredentials.user.updateProfile({
                             displayName: signUpUserName
                         }).then(() => {
-                            const userVerfication = firebase.auth().currentUser;
+                            const userVerfication = auth.currentUser;
                             userVerfication.sendEmailVerification(actionCodeSettings)
                                 .then(() => {
                                     alert("Email sent");
