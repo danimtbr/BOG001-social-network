@@ -17,6 +17,7 @@ auth.onAuthStateChanged((user) => {
     } else {
         localStorage.removeItem("user");
         localStorage.removeItem("username");
+        localStorage.removeItem("urlUserImg");
         console.log("¡¡Deslogueado")
         window.location.href = "#/";
     }

@@ -19,3 +19,15 @@ export default () => {
 
     return divElement;
 }
+
+export const showPopup = (element, tittle, message) => {
+    element.classList.add("active");
+
+    let popupTittle = element.querySelector("#tittlePopup");
+    popupTittle.innerHTML = tittle;
+
+    let popupMessage = element.querySelector("#textPopup");
+    popupMessage.innerHTML = message;
+
+    return element;
+}

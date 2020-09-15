@@ -30,18 +30,21 @@ export const popUpDelete = async(id) => {
 
 
 
-export const updateProfileUser = async(urlImgUser, usernameNew, phonenumberNew) => {
+export const updateProfileUser = async(urlImgUser, usernameNew) => {
     const userCredentials = auth.currentUser;
+    let objectReturn = {
+        data: userCredentials,
+        status: ""
+    };
     try {
         await userCredentials.updateProfile({
             photoURL: urlImgUser,
-            displayName: usernameNew,
-            phoneNumber: phonenumberNew
+            displayName: usernameNew
         });
-        alert("image updated successfully");
+        objectReturn.data = userCredentials;
+        return objectReturn;
     } catch (error) {
-        console.log(error);
-        alert("Error upload Image");
+        objectReturn.status = error.message;
     }
 }
 
