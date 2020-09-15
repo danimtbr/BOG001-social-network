@@ -579,9 +579,8 @@
                 color: white;
                 position: absolute;
                 bottom: 28px;
-<<<<<<< HEAD
-=======
-              
+            }
+            
             #imgNewPost {
                 border-radius: 100%;
                 position: fixed;
@@ -641,8 +640,6 @@
                 margin-left: 50%;
                 box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.5);
                 display: none;
-
->>>>>>> bacc7d6961e71548ad3001014e6aecd86c7677e2
             }
             
             #divNewPost {
