@@ -19,6 +19,9 @@ export default () => {
     divElement.classList = "mainViewPosts";
     divElement.innerHTML = viewPosts;
 
+    const imgAvatar = divElement.querySelector("#avatarUserViewPost");
+    imgAvatar.src = localStorage.getItem("urlUserImg");
+
     const imgSettings = divElement.querySelector("#settingsViewPosts");
     imgSettings.src = settings;
 
@@ -63,84 +66,39 @@ export default () => {
 const printPosts = (listPost, querySnapshot) => {
     listPost.innerHTML = "";
     querySnapshot.forEach(element => {
-            const dataElement = element.data();
-            dataElement.id = element.id;
-            const userSessionNow = localStorage.getItem("user");
-            const divCollection = document.createElement("div");
-            divCollection.classList = "divPost";
-            divCollection.innerHTML = collectionPost;
-            let postUserName = divCollection.querySelector("#usernamePost");
-            postUserName.textContent = dataElement.userName;
-            let userAvatar = divCollection.querySelector("#avatarUser");
-            userAvatar.src = avatar;
-            let postParagraph = divCollection.querySelector("#textPost");
-            postParagraph.innerHTML = dataElement.postText;
-            let divPost = divCollection.querySelector("#divPostId");
-            divPost.id = dataElement.id;
-            let textLikes = divCollection.querySelector("#counterLikes");
-            textLikes.innerHTML = dataElement.usersLike.length + "Likes";
-            let deleteButtons = divCollection.querySelectorAll(".deletePost");
-            const deleteButtonId = divCollection.querySelector("#deletePostButton");
-            deleteButtonId.src = imgDelete;
-            const likebtn = divCollection.querySelector("#like");
+        const dataElement = element.data();
+        dataElement.id = element.id;
+        const userSessionNow = localStorage.getItem("user");
+        const divCollection = document.createElement("div");
+        divCollection.classList = "divPost";
+        divCollection.innerHTML = collectionPost;
+        let postUserName = divCollection.querySelector("#usernamePost");
+        postUserName.textContent = dataElement.userName;
+        let userAvatar = divCollection.querySelector("#avatarUser");
+        userAvatar.src = dataElement.userImgUrl || avatar;
+        let postParagraph = divCollection.querySelector("#textPost");
+        postParagraph.innerHTML = dataElement.postText;
+        let divPost = divCollection.querySelector("#divPostId");
+        divPost.id = dataElement.id;
+        let textLikes = divCollection.querySelector("#counterLikes");
+        textLikes.innerHTML = dataElement.usersLike.length + "Likes";
+        let deleteButtons = divCollection.querySelectorAll(".deletePost");
+        const deleteButtonId = divCollection.querySelector("#deletePostButton");
+        deleteButtonId.src = imgDelete;
+        const likebtn = divCollection.querySelector("#like");
 
-            let idPopUp = document.querySelector("#deleteIdPopup");
-            if (dataElement.usersLike.indexOf(userSessionNow) === -1) {
-                likebtn.src = heart;
-            } else {
-                likebtn.src = heartlike;
-            }
-            const btnEdit = divPost.querySelector("#editPostButton");
-            btnEdit.src = imgEdit;
+        let idPopUp = document.querySelector("#deleteIdPopup");
+        if (dataElement.usersLike.indexOf(userSessionNow) === -1) {
+            likebtn.src = heart;
+        } else {
+            likebtn.src = heartlike;
+        }
+        const btnEdit = divPost.querySelector("#editPostButton");
+        btnEdit.src = imgEdit;
 
-            // ------------------ POPUP DELETE ---------------------->
-            if (dataElement.userId === userSessionNow) {
-                deleteButtonId.style.display = "block";
-
-                deleteButtons.forEach(button => {
-                    // button.addEventListener("click") => {
-                    idPopUp.classList.add("active");
-                    const deleteButtonPopUp = document.querySelector("#btnDelete");
-                    deleteButtonPopUp.addEventListener("click", async(event) => {
-                        await deletePost(event.target.parentNode.parentNode.parentNode.id);
-                        idPopUp.classList.remove("active");
-                    })
-                })
-            }
-
-            const editButtonId = divCollection.querySelector("#editPostButton");
-            if (dataElement.userId === userSessionNow) {
-                editButtonId.style.display = "block";
-                const editButtons = divCollection.querySelectorAll(".editPost");
-                editButtons.forEach(button => {
-                    button.addEventListener("click", async(event) => {
-                        const idEvent = event.target.parentNode.parentNode.parentNode.id;
-                        console.log(idEvent)
-                        const postGet = await getPost(idEvent);
-                        let divPost = divCollection.querySelector("#" + idEvent);
-                        const btnEdit = divPost.querySelector("#editPostButton");
-                        const postEditing = divPost.querySelector("#textPost");
-                        const postEdit = divPost.querySelector("#editPost");
-                        if (btnEdit.innerHTML === "Edit") {
-                            postEditing.style.display = "none";
-                            postEdit.value = postGet.data().postText;
-                            postEdit.style.display = "block";
-                            btnEdit.innerHTML = "Update";
-                        } else {
-                            await updatePost(idEvent, {
-                                "postDate": timeStamp,
-                                "postText": postEdit.value
-                            });
-                            postEdit.style.display = "none";
-                            const postEditing = divPost.querySelector("#textPost");
-                            postEditing.style.display = "block";
-                            btnEdit.innerHTML = "Edit";
-                        }
-                    })
-                })
-            }
-
-
+        // ------------------ POPUP DELETE ---------------------->
+        if (dataElement.userId === userSessionNow) {
+            deleteButtonId.style.display = "block";
             deleteButtons = listenerLaunchDelete(deleteButtons, idPopUp);
             btnEdit.style.display = "block";
             let editButtons = divCollection.querySelectorAll(".editPost");
@@ -170,7 +128,7 @@ const printPosts = (listPost, querySnapshot) => {
 
         listPost.appendChild(divCollection);
     });
-return listPost;
+    return listPost;
 }
 
 const listenerDelete = (popupObject) => {
@@ -227,17 +185,6 @@ const listenerEdit = (listEditing, postContainer) => {
     return listEditing;
 }
 
-likebtn.addEventListener("click", async(event) => {
-    const idPost = event.target.parentNode.parentNode.id;
-    const postGet = await getPost(idPost);
-    if (postGet.data().usersLike.indexOf(localStorage.getItem("user")) === -1) {
-        likebtn.src = heartlike;
-        updateUserLike(idPost, localStorage.getItem("user"));
-    } else {
-        likebtn.src = heart;
-        updateRemoveLike(idPost, localStorage.getItem("user"));
-    }
-})
 
 const listenerLike = (listLikeImg) => {
     listLikeImg.forEach(button => {
@@ -256,15 +203,9 @@ const listenerLike = (listLikeImg) => {
     return listLikeImg;
 }
 
-
-listPost.appendChild(divCollection);
-});
-return listPost;
-
 const setEvents = (postsList) => {
     let listImgLikes = postsList.querySelectorAll(".btnLikePost");
     listImgLikes = listenerLike(listImgLikes);
-
 }
 
 let confirmPostId = "";
