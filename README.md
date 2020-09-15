@@ -1,46 +1,94 @@
-# Creando una Red Social
+<p align="center"> <img src="src/img/readme/logoreadme.PNG" width="1000"></p>
 
-## Índice
+# HiBook
 
-* [1. Preámbulo](#1-preámbulo)
-* [2. Resumen del proyecto](#2-resumen-del-proyecto)
-* [3. Objetivos de aprendizaje](#3-objetivos-de-aprendizaje)
-* [4. Consideraciones generales](#4-consideraciones-generales)
-* [5. Criterios de aceptación mínimos del proyecto](#5-criterios-de-aceptación-mínimos-del-proyecto)
-* [6. Hacker edition](#6-hacker-edition)
-* [7. Entrega](#7-entrega)
-* [8. Pistas, tips y lecturas complementarias](#8-pistas-tips-y-lecturas-complementarias)
+## Index
+* [1. Preamble](#1-Preamble)
+* [2. User Stories](#2-User-Stories)
+* [3. Low fidelity prototype](#3-Low-fidelity-prototype)
+* [4. High fidelity prototype](#4-High-fidelity-prototype)
+* [5. Boilerplate](#5-Boilerplate)
+* [6. Learning goals checklist](#6-Learning-goals-checklist)
 
-## 1. Preámbulo
+# 1. Preamble
 
-Instagram, Snapchat, Twitter, Facebook, Twitch, Linkedin, etc. Las redes
-sociales han invadido nuestras vidas. Las amamos u odiamos, y muchos no podemos
-vivir sin ellas.
+**HiBook** is a social network for those who enjoy reading and want to share their favorite thoughts, authors and phrases. This is a safe space based on respect, where each of the users can express themselves in complete freedom, find recommendations and go to the recommended bookstore where they can purchase their favorite books according to their tastes.
 
-Hay redes sociales de todo tipo y para todo tipo de intereses. Por ejemplo,
-en una ronda de financiamiento con inversionistas, se presentó una red social
-para químicos en la que los usuarios podían publicar artículos sobre sus
-investigaciones, comentar en los artículos de sus colegas, y filtrar artículos
-de acuerdo a determinadas etiquetas o su popularidad, lo más reciente, o lo
-más comentado.
 
-## 2. Resumen del proyecto
+**User profile**: Our users are people between 18 and 30 years old who enjoy the habit of reading and are interested in being part of a respectful and friendly community, in which they can interact with likes and posts making recommendations in any category of interest, sharing good authors and giving literature suggestions.
 
-En este proyecto construirás una Red Social sobre lo que decidan tú y tu equipo.
-Podría ser, por ejemplo, sobre alimentación saludable, feminismo, educación,
-salud, energías renovables, amantes de las [Empanadas](https://es.wikipedia.org/wiki/Empanada)
-o de los [Tacos de Canasta](https://es.wikipedia.org/wiki/Taco), de la
-[Feijoada](https://es.wikipedia.org/wiki/Feijoada), o de lo que sea.
+## 2. User stories
 
-Tu Red Social tendrá que permitir a cualquier usuario crear una cuenta de
-acceso y loguearse con ella; crear, editar, borrar y _"likear"_ publicacciones.
+- _**H1**_: As an user who loves reading, I want to register on a social network to be a member of HiBook.
+- _**H2**_: As an user who loves reading, I want to log into the social network to share and find a community that shares my tastes in books.
+- _**H3**_: As an user who loves reading, I want to create posts through text to share my reading experiences.
+- _**H4**_: As an user who loves reading, I want to view posts from other users to know some recommendations.
+- _**H5**_: As an user who loves reading, I want to edit and delete text posts to share my reading experiences.
+- _**H6**_: As an user who loves reading, I want to like posts to react to other publications.
+-_**H7**_: As an user who loves reading, I want to edit my avatar and username in HiBook.
 
-## 3. Objetivos de aprendizaje
+### 3. Low fidelity prototype
 
-El objetivo principal de aprendizaje de este proyecto es construir una
-[Single-page Application (SPA)](https://es.wikipedia.org/wiki/Single-page_application)
-[_responsive_](https://github.com/Laboratoria/curricula-js/tree/master/topics/css/02-responsive)
- (con más de una vista / página) en la que podamos **leer y escribir datos.**
+<p align="center"><img src="src/img/readme/lowprototype.PNG" width="500" style="box-shadow: 5px 10px 8px #00000011"></p>
+
+
+#### 4. High fidelity prototype
+
+##### Mobile
+<p align="center"> <img src="src/img/readme/mobile1.PNG" width="300" style="margin:10px"> <img style="margin:10px" src="src/img/readme/mobile2.PNG" width="300"> <img style="margin:10px" src="src/img/readme/mobile3.PNG" width="300"> <img style="margin:10px" src="src/img/readme/mobile4.PNG" width="300"> <img style="margin:10px" src="src/img/readme/mobile5.PNG" width="300"> <img style="margin:10px" src="src/img/readme/mobile6.PNG" width="300"> <img style="margin:10px" src="src/img/readme/mobile7.PNG" width="300"> <img style="margin:10px" src="src/img/readme/mobile8.png" width="300"></p>
+
+##### Web
+<p align="center"> <img src="src/img/readme/desktop1.PNG" width="500" style="margin:10px"> <img style="margin:10px" src="src/img/readme/desktop2.PNG" width="500"> <img style="margin:10px" src="src/img/readme/desktop3.PNG" width="500"> <img style="margin:10px" src="src/img/readme/desktop4.PNG" width="500"> <img src="src/img/readme/desktop5.PNG" width="500" style="margin:10px"> <img src="src/img/readme/desktop6.PNG" width="500" style="margin:10px"></p>
+
+
+##### 5. Boilerplate
+
+<pre lang= "text">
+<code>
+├── Readme.md
+├── .vscode
+├── dist
+├── node_modules
+├── src
+    ├── controllers
+        ├─aboutus.controller.js
+        ├─alertdelete.controller.js
+        ├─ avatar.controller.js
+        ├─ default.controller.js
+        ├─ login.controller.js
+        ├─ pages.controller.js.
+        ├─ popups.controller.js 
+        ├─ post.controller.js
+        ├─postTextarea.controller.js
+        ├─signup.controller.js
+     ├── img (visual resources)
+├── lib
+     ├─index.js
+├── router
+     ├─index.routes.js
+├── views
+        ├─aboutus.html
+        ├─alertdelete.html
+        ├─ avatar.html
+        ├─ default.html
+        ├─ login.html
+        ├─ popups.html
+        ├─ postcollection.html
+        ├─postTextarea.html
+        ├─signup.html
+├── index.html
+├── init-firebase.js
+├── main.css
+├── main.js
+| 
+└── test
+|    └── index.spec.js
+|──webpack.config.js
+</code>
+</pre>
+
+
+###### 6. Learning goals checklist
 
 ### HTML y CSS
 
