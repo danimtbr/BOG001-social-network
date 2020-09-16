@@ -32,7 +32,7 @@ export default () => {
     imgEye.src = hideLogin;
 
 
-    // Login Event ------------------------------------------------------>
+    // Agregar evento al boton submit para ejecutar funcion signInWithEmailAndPassword ------->
 
     const loginUser = divElement.querySelector("#formView2");
     loginUser.addEventListener("submit", event => {
@@ -108,6 +108,7 @@ export default () => {
 
     })
 
+    // Ocultar y mostrar password -------------------------------------------->
     const eyesLogin = divElement.querySelector("#eyePassword");
     eyesLogin.addEventListener("click", event => {
         const idPassword = divElement.querySelector("#password");
