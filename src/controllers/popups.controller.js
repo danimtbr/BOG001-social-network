@@ -20,6 +20,7 @@ export default () => {
     return divElement;
 }
 
+// Funcion mostrar popUp -------------------------------------------->
 export const showPopup = (element, tittle, message) => {
     element.classList.add("active");
 

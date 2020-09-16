@@ -4,6 +4,8 @@ import faceImg from "../img/facebook.png";
 import googleImg from "../img/google.png";
 import { pages } from "./pages.controller.js";
 import { auth, firebase } from "../init-firebase.js";
+import { showPopup } from "./popups.controller.js";
+
 
 export default () => {
 
@@ -25,7 +27,7 @@ export default () => {
     imgGoogle.src = googleImg;
 
 
-    // SignUp Event ------------------------------------------------------>
+    // Agregar evento al boton submit y ejecuta funcion createUserWithEmailAndPassword ------->
 
     const signUpUser = divElement.querySelector("#formView3");
     signUpUser.addEventListener("submit", (e) => {
@@ -44,27 +46,20 @@ export default () => {
                     userCredentials.user.updateProfile({
                             displayName: signUpUserName
                         }).then(() => {
+                            // Envia un email de verificacion ------->
                             const userVerfication = auth.currentUser;
                             userVerfication.sendEmailVerification(actionCodeSettings)
                                 .then(() => {
-                                    alert("Email sent");
+                                    let popupElement = divElement.querySelector("#divOverlay");
+                                    showPopup(popupElement, "Email Sent:", "Please check your email to continue");
                                 })
                         })
                         .catch((error) => {
-                            alert("Authentication Failed");
+                            let popupElement = divElement.querySelector("#divOverlay");
+                            showPopup(popupElement, "Authentication Failed:", "Please try again");
                         });
                 })
 
-
-
-
-            // const userVerfication = firebase.auth().currentUser;
-            // console.log(userVerfication);
-            // userVerfication.sendEmailVerification(actionCodeSettings).then(function() {
-            //     alert("Email sent");
-            // }).catch(function(error) {
-            //     alert("Authentication Failed");
-            // })
 
         } else {
             let spanInvalid = divElement.querySelector("#invalidPass");
@@ -86,13 +81,7 @@ export default () => {
                 })
                 .catch(err => {
                     let popupElement = divElement.querySelector("#divOverlay");
-                    popupElement.classList.add("active");
-
-                    let popupTittle = divElement.querySelector("#tittlePopup");
-                    popupTittle.innerHTML = "Error:";
-
-                    let popupMessage = divElement.querySelector("#textPopup");
-                    popupMessage.innerHTML = "Could not authenticate by facebook. Please try again";
+                    showPopup(popupElement, "Error:", "Could not authenticate by facebook. Please try again");
                 })
         })
         // Login Google -------------------------------------------->
@@ -106,15 +95,8 @@ export default () => {
                 console.log("Google signIn");
             })
             .catch(err => {
-                console.log(err);
                 let popupElement = divElement.querySelector("#divOverlay");
-                popupElement.classList.add("active");
-
-                let popupTittle = divElement.querySelector("#tittlePopup");
-                popupTittle.innerHTML = "Error:";
-
-                let popupMessage = divElement.querySelector("#textPopup");
-                popupMessage.innerHTML = "Could not authenticate by Google. Please try again";
+                showPopup(popupElement, "Error:", "Could not authenticate by Google. Please try again");
             })
     })
     return divElement;

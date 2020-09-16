@@ -1,6 +1,6 @@
 import viewPosts from "../views/posts.html";
 import collectionPost from "../views/postcollection.html";
-import { auth, database, timeStamp, arrayUnionFunction, arrayRemoveFunction } from "../init-firebase.js";
+import { auth, timeStamp } from "../init-firebase.js";
 import heartlike from "../img/heartlike.png";
 import heart from "../img/heart.png";
 import settings from "../img/settings.png";
@@ -10,7 +10,8 @@ import imgDelete from "../img/trash.png";
 import imgEdit from "../img/edit-2.png";
 import imgUpdate from "../img/edit-1.png";
 import { pages } from "./pages.controller.js";
-import { onGetPost, getPost, updatePost, updateUserLike, updateRemoveLike, popUpDelete } from "../lib/index.js";
+import { onGetPost, getPost, updatePost, updateUserLike, updateRemoveLike, postDelete } from "../lib/index.js";
+import { showAlertDelete } from "./alertdelete.controller.js";
 
 export default () => {
 
@@ -33,7 +34,7 @@ export default () => {
 
     divElement.appendChild(pages.popupdelete());
 
-
+    // Mostrar y ocultar menu ---------------------->
     const menuSettingsUser = divElement.querySelector("#settingsUser")
     const settingsUser = divElement.querySelector("#settingsViewPosts");
     settingsUser.addEventListener("click", () => {
@@ -41,7 +42,7 @@ export default () => {
         menuSettingsUser.style.display == "none" || "" ? menuSettingsUser.style.display = "flex" : menuSettingsUser.style.display = "none";
     })
 
-
+    // Agregar evento al boton logout ---------------------->
     const logout = divElement.querySelector("#btnLogout");
     logout.addEventListener("click", (event) => {
         event.preventDefault();
@@ -50,18 +51,23 @@ export default () => {
         })
     })
 
+    // Funcion pintar actualizar ordenar posts ---------------------->
+
     onGetPost((querySnapshot) => {
         const orderPosts = divElement.querySelector("#listPosts");
         const listPostPrint = printPosts(orderPosts, querySnapshot);
-        setEvents(listPostPrint);
+        let listImgLikes = listPostPrint.querySelectorAll(".btnLikePost");
+        listImgLikes = listenerLike(listImgLikes);
         orderPosts.replaceWith(listPostPrint);
+        let idPopUp = document.querySelector("#deleteIdPopup");
+        idPopUp = listenerDeletePopup(idPopUp);
     })
 
 
     return divElement;
 }
 
-
+// Definicion funcion pintar posts ---------------------->
 
 const printPosts = (listPost, querySnapshot) => {
     listPost.innerHTML = "";
@@ -82,109 +88,101 @@ const printPosts = (listPost, querySnapshot) => {
         divPost.id = dataElement.id;
         let textLikes = divCollection.querySelector("#counterLikes");
         textLikes.innerHTML = dataElement.usersLike.length + "Likes";
-        let deleteButtons = divCollection.querySelectorAll(".deletePost");
-        const deleteButtonId = divCollection.querySelector("#deletePostButton");
-        deleteButtonId.src = imgDelete;
         const likebtn = divCollection.querySelector("#like");
 
-        let idPopUp = document.querySelector("#deleteIdPopup");
+        // validacion array users likes ---------------------->
+
         if (dataElement.usersLike.indexOf(userSessionNow) === -1) {
             likebtn.src = heart;
         } else {
             likebtn.src = heartlike;
         }
-        const btnEdit = divPost.querySelector("#editPostButton");
-        btnEdit.src = imgEdit;
 
-        // ------------------ POPUP DELETE ---------------------->
+        // pintar boton edit y delete si usuario actual id = usuario post id  ---------------------->
+
         if (dataElement.userId === userSessionNow) {
+            // let deleteButtons = divCollection.querySelectorAll(".deletePost");
+            const deleteButtonId = divCollection.querySelector("#deletePostButton");
+            deleteButtonId.src = imgDelete;
             deleteButtonId.style.display = "block";
-            deleteButtons = listenerLaunchDelete(deleteButtons, idPopUp);
+            // deleteButtons = listenerLaunchDelete(deleteButtons, idPopUp);
+            const btnEdit = divPost.querySelector("#editPostButton");
+            btnEdit.src = imgEdit;
             btnEdit.style.display = "block";
-            let editButtons = divCollection.querySelectorAll(".editPost");
-            editButtons = listenerEdit(editButtons, divPost);
-            // deleteButtons.forEach(button => {
-            //     button.addEventListener("click", (event) => {
-            //         idPopUp.classList.add("active");
-            //         confirmPostId = event.target.parentNode.parentNode.parentNode.parentNode.id;
-            //     })
-            // })
+            // let editButtons = divCollection.querySelectorAll(".editPost");
+            // editButtons = listenerEdit(editButtons, divPost);
+            divPost = listenerEdit(divPost);
+            divPost = listenerDelete(divPost);
         }
-
-        // ----------- FUNCTION LISTENER DELETE ----------------->
-        idPopUp = listenerDelete(idPopUp);
-
-
-
-
-        // if (dataElement.userId === userSessionNow) {
-        //     btnEdit.style.display = "block";
-        //     let editButtons = divCollection.querySelectorAll(".editPost");
-        //     listenerEdit(editButtons);
-        // }
-
-
-
-
         listPost.appendChild(divCollection);
     });
     return listPost;
 }
 
-const listenerDelete = (popupObject) => {
+
+// Eliminar post en el evento click del boton delete del popup ---------------------->
+
+const listenerDeletePopup = (popupObject) => {
     popupObject.addEventListener("click", async(event) => {
         if (event.target.id === "btnDelete") {
-            await popUpDelete(confirmPostId);
-            popupObject.classList.remove("active");
+            await postDelete(confirmPostId);
+            // Oculta popup de confirmacion para eliminar post 
+            showAlertDelete(false);
         }
     })
     return popupObject;
 }
 
-const listenerLaunchDelete = (listDeleteImg, popupObject) => {
-    listDeleteImg.forEach(button => {
-        button.addEventListener("click", (event) => {
-            popupObject.classList.add("active");
-            confirmPostId = event.target.parentNode.parentNode.parentNode.parentNode.id;
-        })
+// Agrega el evento al boton eliminar para mostrar popup ---------------------->
+
+const listenerDelete = (postContainer) => {
+    let button = postContainer.querySelector("#deletePostButton");
+    button.addEventListener("click", async() => {
+        // Muestra popup de confirmacion para eliminar post 
+        showAlertDelete(true);
+        confirmPostId = postContainer.id;
     })
-    return listDeleteImg;
+    return postContainer;
+}
+
+// Agrega el evento al boton editar post para ejecutar la funcion showEditPost------>
+
+const listenerEdit = (postContainer) => {
+    let button = postContainer.querySelector("#editPostButton");
+    button.addEventListener("click", async() => {
+        postContainer = await showEditPost(postContainer);
+    })
+    return postContainer;
+}
+
+// Valida si el usuario esta editando o esta guardando los cambios ---------------------->
+
+const showEditPost = async(postContainer) => {
+    const postText = postContainer.querySelector("#textPost");
+    const postEdit = postContainer.querySelector("#editPost");
+    const buttonEdit = postContainer.querySelector("#editPostButton");
+    if (editingPost === false) {
+        postEdit.value = postText.innerHTML;
+        postText.style.display = "none";
+        postEdit.style.display = "block";
+        buttonEdit.src = imgUpdate;
+        editingPost = true;
+    } else {
+        await updatePost(postContainer.id, {
+            "postDate": timeStamp,
+            "postText": postEdit.value
+        });
+        postEdit.style.display = "none";
+        postText.innerHTML = postEdit.innerHTML;
+        postText.style.display = "block";
+        buttonEdit.src = imgEdit;
+        editingPost = false;
+    }
+    return postContainer;
 }
 
 
-const listenerEdit = (listEditing, postContainer) => {
-    listEditing.forEach(button => {
-        button.addEventListener("click", async(event) => {
-            const idEvent = event.target.parentNode.parentNode.parentNode.parentNode.id;
-            const postGet = await getPost(idEvent);
-            //let divPost = listCollection.querySelector("#" + idEvent);
-            const postEditing = postContainer.querySelector("#textPost");
-            const postEdit = postContainer.querySelector("#editPost");
-            if (editingPost === false) {
-                postEditing.style.display = "none";
-                postEdit.value = postGet.data().postText;
-                postEdit.style.display = "block";
-                //btnEdit.src = imgUpdate;
-                event.target.src = imgUpdate;
-                editingPost = true;
-            } else {
-                await updatePost(idEvent, {
-                    "postDate": timeStamp,
-                    "postText": postEdit.value
-                });
-                postEdit.style.display = "none";
-                //const postEditing = divPost.querySelector("#textPost");
-                postEditing.style.display = "block";
-                //btnEdit.src = imgEdit;
-                event.target.src = imgEdit;
-                editingPost = false;
-            }
-        })
-    })
-
-    return listEditing;
-}
-
+// funcion like unlike ----------------------------->
 
 const listenerLike = (listLikeImg) => {
     listLikeImg.forEach(button => {
@@ -203,20 +201,8 @@ const listenerLike = (listLikeImg) => {
     return listLikeImg;
 }
 
-const setEvents = (postsList) => {
-    let listImgLikes = postsList.querySelectorAll(".btnLikePost");
-    listImgLikes = listenerLike(listImgLikes);
-}
+
+// Variables globales para asignar status---------------------->
 
 let confirmPostId = "";
 let editingPost = false;
-
-// const createPost = async(post) => {
-//     await database.collection("posts").doc().set({
-//         "userId": localStorage.getItem("user"),
-//         "userName": localStorage.getItem("username"),
-//         "postDate": timeStamp,
-//         "postText": post,
-//         "usersLike": new Array()
-//     })
-// }

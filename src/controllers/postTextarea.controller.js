@@ -18,7 +18,7 @@ export default () => {
     divElement.querySelector("#textPost").placeholder = localStorage.getItem("username") + ", what are you thinking " + "?";
 
 
-
+    // Agregar evento en el boton grabar para crear post -------------------------------------------->
     const postForm = divElement.querySelector("#formPost");
     const btnSavePost = divElement.querySelector("#save1");
     btnSavePost.addEventListener("click", async event => {

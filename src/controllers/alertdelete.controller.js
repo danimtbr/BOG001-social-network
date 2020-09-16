@@ -18,3 +18,13 @@ export default () => {
 
     return divElement;
 }
+
+// Funcion mostrar y ocultar popUp -------------------------------------------->
+export const showAlertDelete = (status) => {
+    let idPopUp = document.querySelector("#deleteIdPopup");
+    if (status)
+        idPopUp.classList.add("active");
+    else
+        idPopUp.classList.remove("active");
+    return idPopUp;
+}
