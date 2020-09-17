@@ -95,27 +95,27 @@
 * [x] [Uso de HTML semántico.](https://developer.mozilla.org/en-US/docs/Glossary/Semantics#Semantics_in_HTML)
 * [x] Uso de selectores de CSS.
 * [x] Construir tu aplicación respetando el diseño realizado (maquetación).
-* [x] [Uso de flexbox en CSS.](https://css-tricks.com/snippets/css/a-guide-to-flexbox/)
+* [] [Uso de flexbox en CSS.](https://css-tricks.com/snippets/css/a-guide-to-flexbox/)
 
 ### DOM y Web APIs
 
-* [x] Uso de selectores del DOM.
-* [x] Manejo de eventos del DOM.
-* [x] [Manipulación dinámica del DOM.](https://developer.mozilla.org/es/docs/Referencia_DOM_de_Gecko/Introducci%C3%B3n)
+* [] Uso de selectores del DOM.
+* [] Manejo de eventos del DOM.
+* [] [Manipulación dinámica del DOM.](https://developer.mozilla.org/es/docs/Referencia_DOM_de_Gecko/Introducci%C3%B3n)
 (appendChild |createElement | createTextNode| innerHTML | textContent | etc.)
 * [ ] [History API.](https://developer.mozilla.org/es/docs/DOM/Manipulando_el_historial_del_navegador)
-* [x] [localStorage.](https://developer.mozilla.org/es/docs/Web/API/Window/localStorage)
+* [] [localStorage.](https://developer.mozilla.org/es/docs/Web/API/Window/localStorage)
 
 ### JavaScript
 
 * [x] Uso de condicionales (if-else | switch | operador ternario)
-* [x] Uso de funciones (parámetros | argumentos | valor de retorno)
+* [] Uso de funciones (parámetros | argumentos | valor de retorno)
 * [ ] Manipular arrays (filter | map | sort | reduce)
 * [x] Manipular objects (key | value)
 * [x] Uso ES modules ([`import`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import)
 | [`export`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/export))
 * [ ] Diferenciar entre expression y statements.
-* [x] Diferenciar entre tipos de datos primitivos y no primitivos.
+* [] Diferenciar entre tipos de datos primitivos y no primitivos.
 * [ ] [Uso de callbacks.](https://developer.mozilla.org/es/docs/Glossary/Callback_function)
 * [ ] [Consumo de Promesas.](https://scotch.io/tutorials/javascript-promises-for-dummies#toc-consuming-promises)
 
@@ -143,7 +143,7 @@
 * [x] [Firestore.](https://firebase.google.com/docs/firestore)
 * [x] [Firebase Auth.](https://firebase.google.com/docs/auth/web/start)
 * [ ] [Firebase security rules.](https://firebase.google.com/docs/rules)
-* [x] Observadores. ([onAuthStateChanged](https://firebase.google.com/docs/auth/web/manage-users?hl=es#get_the_currently_signed-in_user)
+* [] Observadores. ([onAuthStateChanged](https://firebase.google.com/docs/auth/web/manage-users?hl=es#get_the_currently_signed-in_user)
  | [onSnapshot](https://firebase.google.com/docs/firestore/query-data/listen#listen_to_multiple_documents_in_a_collection))
 
 ### UX
