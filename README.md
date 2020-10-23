@@ -1,4 +1,4 @@
-<p align="center"> <img src="src/img/readme/logoreadme.PNG" width="1000"></p>
+
 
 # HiBook
 
